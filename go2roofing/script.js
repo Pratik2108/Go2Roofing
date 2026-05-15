@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initLeadForm();
   initLeakGuide();
   initCalculator();
+  initEstimatorCarousel();
   initRevealAnimations();
   initScrollSpy();
   initBudgetSlider();
@@ -76,16 +77,17 @@ function initHeader() {
 /* ---------- Theme toggle ---------- */
 function initThemeToggle() {
   const toggle = document.getElementById('themeToggle');
+  // Dark is now the default. Load saved preference.
   const saved = localStorage.getItem('g2r-theme');
-  if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
   toggle.addEventListener('click', () => {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    if (isDark) {
-      document.documentElement.removeAttribute('data-theme');
-      localStorage.setItem('g2r-theme', 'light');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    if (isLight) {
+      document.documentElement.removeAttribute('data-theme');  // back to dark (default)
       localStorage.setItem('g2r-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('g2r-theme', 'light');
     }
   });
 }
@@ -804,4 +806,159 @@ function initScrollSpy() {
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
   sections.forEach(s => obs.observe(s));
+}
+
+/* ========================================
+   Estimator Carousel (3-step)
+   ======================================== */
+function initEstimatorCarousel() {
+  const wrap = document.querySelector('.ec-wrap');
+  if (!wrap) return;
+
+  const panels = wrap.querySelectorAll('.ec-panel');
+  const labels = wrap.querySelectorAll('.ec-label');
+  const progFill = document.getElementById('ecProgFill');
+  const liveAmt = document.getElementById('ecLiveAmt');
+  const prevBtn = document.getElementById('ecPrev');
+  const nextBtn = document.getElementById('ecNext');
+  const calcBtn = document.getElementById('ecCalc');
+  const resultCard = document.getElementById('ecResult');
+  const restartBtn = document.getElementById('ecRestart');
+
+  const LABOUR = 1.85, TEAROFF = 0.85, DISPOSAL = 0.42, UNDERLAY = 0.45, PERMIT = 185, HST = 0.13, MARGIN = 0.08;
+  const TIERS = { shield30: { name: 'Shield 30', rate: 4.40 }, fortress50: { name: 'Fortress 50', rate: 6.30 }, summit: { name: 'Summit Stone', rate: 10.40 } };
+
+  let current = 1;
+  const TOTAL = 3;
+
+  const fmtC = n => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const r50 = n => Math.round(n / 50) * 50;
+  const radio = name => document.querySelector(`input[name="${name}"]:checked`);
+
+  function compute() {
+    const sqft = parseFloat(document.getElementById('ecSqft')?.value) || 1800;
+    const tierKey = radio('ecTier')?.value || 'fortress50';
+    const tier = TIERS[tierKey];
+    const waste = parseFloat(radio('ecComplex')?.dataset.waste) || 1.15;
+    const pitchMult = parseFloat(radio('ecPitch')?.dataset.mult) || 1.10;
+    const storeyMult = parseFloat(radio('ecStoreys')?.dataset.mult) || 1.10;
+    const typeMult = parseFloat(radio('ecType')?.dataset.mult) || 1.0;
+
+    const mat = r50(sqft * waste * tier.rate);
+    const labour = r50(sqft * LABOUR * pitchMult * storeyMult * typeMult);
+    const tearoff = r50(sqft * TEAROFF);
+    const disposal = r50(sqft * DISPOSAL);
+    const underlay = r50(sqft * UNDERLAY);
+    let addons = 0;
+    if (document.getElementById('ecRidge')?.checked) addons += 480;
+    if (document.getElementById('ecEaves')?.checked) addons += 880;
+    if (document.getElementById('ecSky')?.checked) addons += 1250;
+    if (document.getElementById('ecSnow')?.checked) addons += 580;
+
+    const sub = mat + labour + tearoff + disposal + underlay + PERMIT + addons;
+    const tax = Math.round(sub * HST);
+    const base = sub + tax;
+    return { low: base, high: Math.round(base * (1 + MARGIN)), mat, labour, tearoff, disposal, underlay, addons, tax, tier, waste, sqft };
+  }
+
+  let liveVal = 0;
+  function animateLive(target) {
+    const s = liveVal, d = target - s, dur = 450, t0 = performance.now();
+    const tick = now => {
+      const p = Math.min((now - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+      liveAmt.textContent = '$' + Math.round(s + d * e).toLocaleString();
+      if (p < 1) requestAnimationFrame(tick); else liveVal = target;
+    };
+    requestAnimationFrame(tick);
+  }
+
+  function updateLive() {
+    const sqft = parseFloat(document.getElementById('ecSqft')?.value) || 0;
+    const tierEl = radio('ecTier');
+    if (sqft < 400) { liveAmt.textContent = '—'; return; }
+    const rate = tierEl ? parseFloat(tierEl.dataset.rate) : 6.30;
+    const rough = Math.round(sqft * rate * 1.15 * 1.13 / 100) * 100;
+    animateLive(rough);
+  }
+
+  function allFilled() {
+    const sqft = parseFloat(document.getElementById('ecSqft')?.value) || 0;
+    return sqft >= 400 && radio('ecType') && radio('ecStoreys') && radio('ecPitch') && radio('ecComplex') && radio('ecTier')
+      && (document.getElementById('ecPostal')?.value?.trim().length >= 6);
+  }
+
+  function refreshCalcBtn() {
+    if (current !== TOTAL) return;
+    calcBtn.disabled = !allFilled();
+    calcBtn.style.opacity = allFilled() ? '1' : '0.45';
+  }
+
+  function render() {
+    panels.forEach(p => p.classList.toggle('active', +p.dataset.p === current));
+    labels.forEach((l, i) => {
+      l.classList.toggle('active', i + 1 === current);
+      l.classList.toggle('done', i + 1 < current);
+    });
+    progFill.style.width = (current / TOTAL * 100) + '%';
+    prevBtn.disabled = current === 1;
+    nextBtn.hidden = current === TOTAL;
+    calcBtn.hidden = current !== TOTAL;
+    if (current === TOTAL) refreshCalcBtn();
+  }
+
+  prevBtn.addEventListener('click', () => { if (current > 1) { current--; render(); } });
+  nextBtn.addEventListener('click', () => { if (current < TOTAL) { current++; render(); } });
+  labels.forEach((l, i) => l.addEventListener('click', () => { if (i + 1 <= current) { current = i + 1; render(); } }));
+
+  // Live updates on any change
+  wrap.addEventListener('change', () => { updateLive(); refreshCalcBtn(); });
+  document.getElementById('ecSqft')?.addEventListener('input', () => { updateLive(); refreshCalcBtn(); });
+  document.getElementById('ecPostal')?.addEventListener('input', () => {
+    const v = document.getElementById('ecPostal').value.replace(/\s/g,'').toUpperCase();
+    document.getElementById('ecPostal').value = v.length > 3 ? v.slice(0,3) + ' ' + v.slice(3,6) : v;
+    const prefix = v.slice(0,2);
+    const hint = document.getElementById('ecPostalHint');
+    if (['N1','N2','N3'].includes(prefix)) { hint.textContent = '✓ Serviced area.'; hint.style.color = 'var(--success)'; }
+    else if (v.startsWith('N')) { hint.textContent = 'Slightly outside core area — still serviceable.'; hint.style.color = 'var(--accent-deep)'; }
+    refreshCalcBtn();
+  });
+
+  // Auto-advance when a tile is selected in steps 1 & 2
+  wrap.querySelectorAll('.ec-type input, .ec-pitch input, .ec-complex input, .ec-storey-row input').forEach(inp => {
+    inp.addEventListener('change', () => { if (current < TOTAL && inp.name !== 'ecStoreys') updateLive(); });
+  });
+
+  calcBtn.addEventListener('click', () => {
+    const est = compute();
+    document.getElementById('ecResultTitle').textContent = 'Estimated price range';
+    document.getElementById('ecResultSub').textContent =
+      est.sqft.toLocaleString() + ' sqft · ' + est.tier.name + ' · waste ×' + est.waste.toFixed(2);
+    document.getElementById('ecRangeLow').textContent = fmtC(est.low);
+    document.getElementById('ecRangeHigh').textContent = fmtC(est.high);
+
+    document.getElementById('ecBreakdown').innerHTML = [
+      ['Materials', fmtC(est.mat)],
+      ['Labour', fmtC(est.labour)],
+      ['Tear-off & disposal', fmtC(est.tearoff + est.disposal)],
+      ['Underlayment', fmtC(est.underlay)],
+      ['Add-ons', fmtC(est.addons)],
+      ['HST (13%)', fmtC(est.tax)],
+    ].map(([l, v]) => `<div class="ec-breakdown-item"><span>${l}</span><strong>${v}</strong></div>`).join('');
+
+    resultCard.hidden = false;
+    setTimeout(() => resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+  });
+
+  restartBtn?.addEventListener('click', () => {
+    resultCard.hidden = true;
+    wrap.querySelectorAll('input[type=radio]').forEach(r => r.checked = false);
+    wrap.querySelectorAll('input[type=number]').forEach(r => r.value = '');
+    wrap.querySelectorAll('input[type=text]').forEach(r => r.value = '');
+    document.getElementById('ecRidge').checked = true;
+    liveAmt.textContent = '—'; liveVal = 0;
+    current = 1; render();
+    wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  render();
 }

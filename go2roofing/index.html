@@ -15,7 +15,7 @@
   <div class="announce">
     <div class="container announce-inner">
       <span class="pulse-dot"></span>
-      <span>24/7 Storm &amp; Emergency Leak Response — average on-site time under 90 minutes</span>
+      <span>24/7 Storm &amp; Emergency Response — average on-site arrival under 90 min</span>
       <a href="#contact" class="announce-cta">Get help now →</a>
     </div>
   </div>
@@ -33,7 +33,7 @@
         </span>
         <span class="brand-text">
           <strong>Go2Roofing</strong>
-          <em>Built to last. Backed for life.</em>
+          <em>Crafted for Ontario homes.</em>
         </span>
       </a>
 
@@ -97,7 +97,7 @@
             <span class="dot-row"><span></span><span></span><span></span></span>
             Ontario&apos;s top-rated roofing crew · 4,800+ roofs installed
           </div>
-          <h1>The last roof <span class="accent">your home</span> will ever need.</h1>
+          <h1>Roofing that holds. <span class="accent">Installed right,</span> the first time.</h1>
           <p class="lede">
             Go2Roofing replaces, repairs, and protects roofs with engineered systems built for
             ice, wind, and the worst Ontario winters. Lifetime workmanship warranty. Zero-pressure quotes.
@@ -727,270 +727,119 @@
     </section>
 
     <!-- ===== Quote Calculator ===== -->
-    <section class="section calculator" id="estimator">
+    <section class="section ec-section" id="estimator">
       <div class="container">
         <header class="section-head">
-          <span class="kicker">Kitchener-Waterloo · Cambridge · Guelph</span>
-          <h2>Build your itemized roofing quote.</h2>
-          <p>Real Go2Roofing pricing for the K-W region — fill in your home details and get a transparent, line-by-line estimate in under two minutes.</p>
+          <span class="kicker">K-W · Cambridge · Guelph</span>
+          <h2>What will your roof cost?</h2>
+          <p>Three steps. Real regional pricing. No commitment.</p>
         </header>
 
-        <div class="calc-shell">
-          <form class="calc-form" id="calcForm" novalidate>
-            <!-- Step 1: Property -->
-            <div class="calc-step">
-              <div class="calc-step-head">
-                <span class="calc-num">01</span>
-                <h3>Property details</h3>
+        <div class="ec-wrap">
+          <div class="ec-live" id="ecLive">
+            <span>Starting from</span>
+            <strong id="ecLiveAmt">—</strong>
+          </div>
+
+          <div class="ec-prog">
+            <div class="ec-prog-bar"><div class="ec-prog-fill" id="ecProgFill" style="width:33%"></div></div>
+            <div class="ec-prog-labels">
+              <span class="ec-label active" data-s="1"><em>01</em> Property</span>
+              <span class="ec-label" data-s="2"><em>02</em> Measurements</span>
+              <span class="ec-label" data-s="3"><em>03</em> Materials</span>
+            </div>
+          </div>
+
+          <div class="ec-panel active" data-p="1">
+            <h4>Property type <span class="req">*</span></h4>
+            <div class="ec-type-grid">
+              <label class="ec-type"><input type="radio" name="ecType" value="house" data-mult="1.0" /><div><svg viewBox="0 0 52 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 26L26 8L46 26V44H6Z"/><path d="M16 44V30h20v14"/><path d="M6 26L26 16L46 26"/></svg><span>Detached</span></div></label>
+              <label class="ec-type"><input type="radio" name="ecType" value="semi" data-mult="0.92" /><div><svg viewBox="0 0 56 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 28L18 12L32 28V44H4Z"/><path d="M24 28L38 12L52 28V44H24Z"/><line x1="32" y1="28" x2="32" y2="44"/></svg><span>Semi-detached</span></div></label>
+              <label class="ec-type"><input type="radio" name="ecType" value="town" data-mult="0.85" /><div><svg viewBox="0 0 64 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 30L16 14L28 30V44H4Z"/><path d="M26 28L38 12L50 28V44H26Z"/><path d="M48 32L56 20L64 32V44H48Z"/></svg><span>Townhouse</span></div></label>
+              <label class="ec-type"><input type="radio" name="ecType" value="bungalow" data-mult="0.95" /><div><svg viewBox="0 0 56 40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 26L28 8L52 26V38H4Z"/><path d="M12 38V26h32v12"/></svg><span>Bungalow</span></div></label>
+              <label class="ec-type"><input type="radio" name="ecType" value="rural" data-mult="1.08" /><div><svg viewBox="0 0 56 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 30L20 12L36 30V44H4Z"/><path d="M30 30L44 14L56 28V44H30Z"/></svg><span>Cottage/Rural</span></div></label>
+            </div>
+            <div class="ec-postal-row">
+              <label class="field">
+                <span>Postal code <span class="req">*</span></span>
+                <input type="text" id="ecPostal" placeholder="N2L 3G1" maxlength="7" autocomplete="postal-code" />
+                <small class="field-hint" id="ecPostalHint">K-W, Cambridge &amp; Guelph area serviced</small>
+              </label>
+            </div>
+          </div>
+
+          <div class="ec-panel" data-p="2">
+            <div class="ec-meas-cols">
+              <div>
+                <h4>Square footage <span class="req">*</span></h4>
+                <label class="field"><input type="number" id="ecSqft" min="400" max="12000" step="50" placeholder="e.g. 1,800 sqft" /><small class="field-hint">Unsure? home footprint × 1.3</small></label>
+                <h4 style="margin-top:20px">Storeys <span class="req">*</span></h4>
+                <div class="ec-storey-row">
+                  <label class="ec-opt"><input type="radio" name="ecStoreys" value="1" data-mult="1.0" /><span>1</span></label>
+                  <label class="ec-opt"><input type="radio" name="ecStoreys" value="1.5" data-mult="1.05" /><span>1.5</span></label>
+                  <label class="ec-opt"><input type="radio" name="ecStoreys" value="2" data-mult="1.10" /><span>2</span></label>
+                  <label class="ec-opt"><input type="radio" name="ecStoreys" value="2.5" data-mult="1.18" /><span>2.5</span></label>
+                  <label class="ec-opt"><input type="radio" name="ecStoreys" value="3" data-mult="1.28" /><span>3+</span></label>
+                </div>
               </div>
-              <div class="calc-grid">
-                <label class="field">
-                  <span>Postal code <em>*</em></span>
-                  <input type="text" name="postal" id="calcPostal" required maxlength="7" placeholder="N2L 3G1" autocomplete="postal-code" />
-                  <small class="field-hint" id="postalHint">We service postal codes starting with N1, N2, N3 (K-W region).</small>
-                </label>
-                <label class="field">
-                  <span>Property type <em>*</em></span>
-                  <select name="propertyType" id="calcType" required>
-                    <option value="">Select…</option>
-                    <option value="house" data-mult="1.0">Detached house</option>
-                    <option value="semi" data-mult="0.92">Semi-detached</option>
-                    <option value="town" data-mult="0.85">Townhouse</option>
-                    <option value="bungalow" data-mult="0.95">Bungalow</option>
-                    <option value="rural" data-mult="1.08">Cottage / Rural</option>
-                  </select>
-                </label>
-                <label class="field">
-                  <span>Number of storeys <em>*</em></span>
-                  <select name="storeys" id="calcStoreys" required>
-                    <option value="">Select…</option>
-                    <option value="1" data-mult="1.0">1 storey</option>
-                    <option value="1.5" data-mult="1.05">1.5 storey</option>
-                    <option value="2" data-mult="1.10">2 storey</option>
-                    <option value="2.5" data-mult="1.18">2.5 storey</option>
-                    <option value="3" data-mult="1.28">3+ storey</option>
-                  </select>
-                </label>
-                <label class="field">
-                  <span>Roof square footage <em>*</em></span>
-                  <input type="number" name="sqft" id="calcSqft" required min="400" max="12000" step="50" placeholder="e.g. 1800" />
-                  <small class="field-hint">Not sure? Roof area ≈ home footprint × 1.3</small>
-                </label>
-                <label class="field">
-                  <span>Roof pitch <em>*</em></span>
-                  <select name="pitch" id="calcPitch" required>
-                    <option value="">Select…</option>
-                    <option value="low" data-mult="1.00">Low (2/12 – 4/12) — walkable</option>
-                    <option value="med" data-mult="1.10">Average (5/12 – 7/12)</option>
-                    <option value="steep" data-mult="1.25">Steep (8/12 – 10/12) — requires harness</option>
-                    <option value="extreme" data-mult="1.45">Very steep (12/12+) — scaffold</option>
-                  </select>
-                </label>
-                <label class="field">
-                  <span>Roof complexity <em>*</em></span>
-                  <select name="complexity" id="calcComplex" required>
-                    <option value="">Select…</option>
-                    <option value="simple" data-mult="1.00">Simple — single gable</option>
-                    <option value="hip" data-mult="1.08">Hip roof</option>
-                    <option value="dormer" data-mult="1.18">Has dormers / valleys</option>
-                    <option value="cutup" data-mult="1.30">Multiple peaks &amp; dormers</option>
-                  </select>
-                </label>
-                <label class="field">
-                  <span>Existing roof layers to remove <em>*</em></span>
-                  <select name="layers" id="calcLayers" required>
-                    <option value="">Select…</option>
-                    <option value="0">No tear-off (new construction)</option>
-                    <option value="1">1 layer</option>
-                    <option value="2">2 layers</option>
-                    <option value="3">3 layers (max code)</option>
-                  </select>
-                </label>
-                <label class="field">
-                  <span>Access difficulty <em>*</em></span>
-                  <select name="access" id="calcAccess" required>
-                    <option value="">Select…</option>
-                    <option value="easy" data-mult="1.00">Easy — driveway access</option>
-                    <option value="normal" data-mult="1.06">Normal</option>
-                    <option value="tight" data-mult="1.15">Tight — narrow lot or fence</option>
-                    <option value="restricted" data-mult="1.28">Restricted — alley / no driveway</option>
-                  </select>
-                </label>
+              <div>
+                <h4>Roof pitch <span class="req">*</span></h4>
+                <div class="ec-pitch-grid">
+                  <label class="ec-pitch"><input type="radio" name="ecPitch" value="low" data-mult="1.00" /><div><svg viewBox="0 0 50 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 22L46 22L46 15L25 6L4 15Z"/></svg><span>Low 4/12</span></div></label>
+                  <label class="ec-pitch"><input type="radio" name="ecPitch" value="med" data-mult="1.10" /><div><svg viewBox="0 0 50 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 22L46 22L46 14L25 3L4 14Z"/></svg><span>Avg 6/12</span></div></label>
+                  <label class="ec-pitch"><input type="radio" name="ecPitch" value="steep" data-mult="1.25" /><div><svg viewBox="0 0 50 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 22L46 22L40 14L25 2L10 14Z"/></svg><span>Steep 8/12</span></div></label>
+                  <label class="ec-pitch"><input type="radio" name="ecPitch" value="extreme" data-mult="1.45" /><div><svg viewBox="0 0 50 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 22L46 22L34 14L25 1L16 14Z"/></svg><span>12/12+</span></div></label>
+                </div>
               </div>
             </div>
-
-            <!-- Step 2: System -->
-            <div class="calc-step">
-              <div class="calc-step-head">
-                <span class="calc-num">02</span>
-                <h3>Choose your system</h3>
-              </div>
-              <div class="calc-tiers">
-                <label class="calc-tier">
-                  <input type="radio" name="tier" value="shield30" required />
-                  <div class="calc-tier-card">
-                    <span class="calc-tier-tag">Essential</span>
-                    <h4>Shield 30</h4>
-                    <p>30-yr architectural shingles<br/>5-yr workmanship warranty</p>
-                    <strong>$4.40 <em>/ sq ft</em></strong>
-                  </div>
-                </label>
-                <label class="calc-tier">
-                  <input type="radio" name="tier" value="fortress50" checked />
-                  <div class="calc-tier-card">
-                    <span class="calc-tier-tag accent">Most popular</span>
-                    <h4>Fortress 50</h4>
-                    <p>50-yr laminate shingles<br/>Lifetime workmanship warranty</p>
-                    <strong>$6.30 <em>/ sq ft</em></strong>
-                  </div>
-                </label>
-                <label class="calc-tier">
-                  <input type="radio" name="tier" value="summit" />
-                  <div class="calc-tier-card">
-                    <span class="calc-tier-tag">Premium</span>
-                    <h4>Summit Stone</h4>
-                    <p>Class-4 impact designer<br/>Insurance discount eligible</p>
-                    <strong>$10.40 <em>/ sq ft</em></strong>
-                  </div>
-                </label>
-              </div>
+            <h4 style="margin-top:26px">Roof complexity <span class="req">*</span></h4>
+            <p style="color:var(--muted);font-size:.85rem;margin:-4px 0 14px">Affects shingle waste — more cuts = more material.</p>
+            <div class="ec-complex-grid">
+              <label class="ec-complex"><input type="radio" name="ecComplex" value="simple" data-waste="1.10" /><div><svg viewBox="0 0 50 32" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 28L25 6L46 28Z"/></svg><strong>Simple gable</strong><small>×1.10</small></div></label>
+              <label class="ec-complex"><input type="radio" name="ecComplex" value="hip" data-waste="1.15" /><div><svg viewBox="0 0 50 32" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M25 4L46 16V28H4V16Z"/></svg><strong>Hip roof</strong><small>×1.15</small></div></label>
+              <label class="ec-complex"><input type="radio" name="ecComplex" value="dormer" data-waste="1.20" /><div><svg viewBox="0 0 50 32" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 28L25 6L48 28Z"/><path d="M17 28V20L25 12L33 20V28"/></svg><strong>Dormers</strong><small>×1.20</small></div></label>
+              <label class="ec-complex"><input type="radio" name="ecComplex" value="cutup" data-waste="1.25" /><div><svg viewBox="0 0 50 32" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 28L12 14L22 22L25 4L28 22L38 14L48 28Z"/></svg><strong>Multiple peaks</strong><small>×1.25</small></div></label>
             </div>
+          </div>
 
-            <!-- Step 3: Add-ons -->
-            <div class="calc-step">
-              <div class="calc-step-head">
-                <span class="calc-num">03</span>
-                <h3>Upgrades &amp; add-ons</h3>
-                <span class="calc-step-sub">Optional</span>
-              </div>
-              <div class="calc-grid">
-                <label class="field">
-                  <span>Ice &amp; water shield coverage</span>
-                  <select name="iws" id="calcIws">
-                    <option value="3ft" data-rate="180">3 ft at eaves (code minimum)</option>
-                    <option value="6ft" data-rate="340" selected>6 ft at eaves (recommended)</option>
-                    <option value="perimeter" data-rate="640">Full perimeter + valleys</option>
-                    <option value="full" data-rate="0.95">Full deck (best for ice damming) — $0.95/sqft</option>
-                  </select>
-                </label>
-                <label class="field">
-                  <span>Drip edge &amp; flashing</span>
-                  <select name="drip" id="calcDrip">
-                    <option value="aluminum" data-rate="0">Aluminum (included)</option>
-                    <option value="painted" data-rate="320">Pre-painted aluminum (+$320)</option>
-                    <option value="copper" data-rate="1450">Copper accents (+$1,450)</option>
-                  </select>
-                </label>
-                <label class="field">
-                  <span>Skylights to install / replace</span>
-                  <input type="number" name="skylights" id="calcSkylights" min="0" max="12" step="1" value="0" placeholder="0" />
-                  <small class="field-hint">$1,250 each (replacement) — includes flashing kit</small>
-                </label>
-                <label class="field">
-                  <span>Eavestrough replacement (linear feet)</span>
-                  <input type="number" name="eaves" id="calcEaves" min="0" max="400" step="5" value="0" placeholder="0" />
-                  <small class="field-hint">$11 / linear foot — seamless aluminum</small>
-                </label>
-                <label class="checkbox addon">
-                  <input type="checkbox" name="ridge" id="calcRidge" checked />
-                  <span><strong>Ridge venting + balance audit</strong> — $480<br/><small>Highly recommended for ice-dam &amp; mold prevention</small></span>
-                </label>
-                <label class="checkbox addon">
-                  <input type="checkbox" name="snowGuards" id="calcSnow" />
-                  <span><strong>Snow guards</strong> — $24 each (auto-calc)<br/><small>Prevent ice avalanches over walkways &amp; doors</small></span>
-                </label>
-              </div>
+          <div class="ec-panel" data-p="3">
+            <h4>Choose your system <span class="req">*</span></h4>
+            <div class="ec-tier-grid">
+              <label class="ec-tier-card"><input type="radio" name="ecTier" value="shield30" data-rate="4.40" /><div class="ec-tier-inner"><span class="ec-tier-tag">Essential</span><strong>Shield 30</strong><span class="ec-brand-pill" style="--bc:#c8232b">IKO</span><p>30-yr arch shingles · 5-yr workmanship</p><em>$4.40<small>/sqft</small></em></div></label>
+              <label class="ec-tier-card ec-pop"><input type="radio" name="ecTier" value="fortress50" data-rate="6.30" /><div class="ec-tier-inner"><span class="ec-tier-tag pop">Most installed</span><strong>Fortress 50</strong><span class="ec-brand-pill" style="--bc:#0072ce">GAF</span><p>50-yr laminate · Lifetime workmanship</p><em>$6.30<small>/sqft</small></em></div></label>
+              <label class="ec-tier-card"><input type="radio" name="ecTier" value="summit" data-rate="10.40" /><div class="ec-tier-inner"><span class="ec-tier-tag">Premium</span><strong>Summit Stone</strong><span class="ec-brand-pill" style="--bc:#0d7041">CT</span><p>Class-4 impact · Insurance eligible</p><em>$10.40<small>/sqft</small></em></div></label>
             </div>
-
-            <!-- Step 4: Contact -->
-            <div class="calc-step">
-              <div class="calc-step-head">
-                <span class="calc-num">04</span>
-                <h3>Where should we send your quote?</h3>
-              </div>
-              <div class="calc-grid">
-                <label class="field">
-                  <span>Full name <em>*</em></span>
-                  <input type="text" name="name" id="calcName" required placeholder="Jane Doe" autocomplete="name" />
-                </label>
-                <label class="field">
-                  <span>Email <em>*</em></span>
-                  <input type="email" name="email" id="calcEmail" required placeholder="jane@email.com" autocomplete="email" />
-                </label>
-                <label class="field">
-                  <span>Phone <em>*</em></span>
-                  <input type="tel" name="phone" id="calcPhone" required placeholder="(548) 255-0465" autocomplete="tel" />
-                </label>
-                <label class="field">
-                  <span>Property address</span>
-                  <input type="text" name="address" id="calcAddress" placeholder="123 Maple St, Kitchener" autocomplete="street-address" />
-                </label>
-              </div>
+            <h4 style="margin-top:26px">Add-ons <span style="color:var(--muted);font-weight:400;font-size:.85rem">(optional)</span></h4>
+            <div class="ec-addons">
+              <label class="ec-addon"><input type="checkbox" id="ecRidge" checked /><span>Ridge venting <em>+$480</em></span></label>
+              <label class="ec-addon"><input type="checkbox" id="ecEaves" /><span>Eavestrough 80lf <em>+$880</em></span></label>
+              <label class="ec-addon"><input type="checkbox" id="ecSky" /><span>1 skylight <em>+$1,250</em></span></label>
+              <label class="ec-addon"><input type="checkbox" id="ecSnow" /><span>Snow guards <em>+$580</em></span></label>
             </div>
+          </div>
 
-            <div class="calc-actions">
-              <button type="reset" class="btn btn-ghost" id="calcReset">Reset</button>
-              <button type="submit" class="btn btn-primary btn-lg" id="calcSubmit">
-                Calculate my quote
-                <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M5 12h12l-5-5 1.4-1.4L20.8 12l-7.4 6.4L12 17l5-5H5z"/></svg>
-              </button>
-            </div>
-
-            <div class="calc-error" id="calcError" hidden>
-              <strong>Please complete the highlighted fields.</strong>
-              <ul id="calcErrorList"></ul>
-            </div>
-          </form>
-
-          <!-- Quote Result -->
-          <aside class="calc-result" id="calcResult" hidden>
-            <div class="calc-result-head">
-              <span class="kicker">Your itemized quote</span>
-              <h3 id="quoteTitle">Quote #<span id="quoteId"></span></h3>
-              <p id="quoteCustomer"></p>
-              <p class="quote-meta"><span id="quoteAddress"></span> · <span id="quoteDate"></span></p>
-            </div>
-
-            <div class="quote-system" id="quoteSystem"></div>
-
-            <table class="quote-table">
-              <thead>
-                <tr><th>Line item</th><th>Detail</th><th class="num">Amount</th></tr>
-              </thead>
-              <tbody id="quoteLines"></tbody>
-              <tfoot>
-                <tr class="quote-subtotal"><td colspan="2">Subtotal</td><td class="num" id="quoteSubtotal"></td></tr>
-                <tr><td colspan="2">HST (13%)</td><td class="num" id="quoteTax"></td></tr>
-                <tr class="quote-total"><td colspan="2">Estimated total</td><td class="num" id="quoteTotal"></td></tr>
-              </tfoot>
-            </table>
-
-            <div class="quote-callouts">
-              <div class="quote-callout">
-                <strong>Financing</strong>
-                <span>0% APR for 12 months — approx. <em id="quoteFinance"></em>/mo</span>
-              </div>
-              <div class="quote-callout">
-                <strong>Validity</strong>
-                <span>This estimate is valid for <em>30 days</em> from today</span>
-              </div>
-              <div class="quote-callout">
-                <strong>Confidence</strong>
-                <span>± 8% — final on-site inspection is always free</span>
-              </div>
-            </div>
-
-            <div class="quote-actions">
-              <button type="button" class="btn btn-primary btn-lg" id="quoteBook">Book my free on-site visit</button>
-              <button type="button" class="btn btn-ghost" id="quotePrint">🖨 Print / Save PDF</button>
-              <button type="button" class="btn btn-ghost" id="quoteEdit">← Edit inputs</button>
-            </div>
-
-            <p class="quote-fineprint">
-              Estimate based on inputs provided. Final invoice may vary depending on hidden deck damage, code upgrades, or material market fluctuation. Go2Roofing&apos;s on-site visit will lock in the price. Lifetime workmanship warranty included on Fortress 50 &amp; Summit Stone systems.
-            </p>
-          </aside>
+          <div class="ec-nav">
+            <button type="button" class="btn btn-ghost" id="ecPrev" disabled>← Back</button>
+            <button type="button" class="btn btn-primary" id="ecNext">Continue →</button>
+            <button type="button" class="btn btn-primary ec-calc-btn" id="ecCalc" hidden>Get my price range →</button>
+          </div>
         </div>
+
+        <div class="ec-result" id="ecResult" hidden>
+          <div class="ec-result-top">
+            <div><span class="kicker">Your estimate</span><h3 id="ecResultTitle">Estimated price range</h3><p id="ecResultSub" class="ec-result-sub"></p></div>
+            <button type="button" class="btn btn-ghost" id="ecRestart">Start over</button>
+          </div>
+          <div class="ec-range">
+            <div class="ec-range-box"><span>Low estimate</span><strong id="ecRangeLow">—</strong></div>
+            <div class="ec-range-div">–</div>
+            <div class="ec-range-box high"><span>High estimate</span><strong id="ecRangeHigh">—</strong></div>
+          </div>
+          <div class="ec-breakdown" id="ecBreakdown"></div>
+          <p class="ec-fine">± 8% variance — on-site assessment is always free and confirms your exact price.</p>
+          <a href="#contact" class="btn btn-primary btn-lg">Book my free on-site visit →</a>
+        </div>
+
       </div>
     </section>
 
@@ -1002,39 +851,22 @@
           <h2>1,820+ five-star reviews and counting.</h2>
         </header>
 
-        <div class="reviews-grid" id="reviewsGrid">
-          <article class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>“Quoted three roofers — Go2 was the only crew who climbed into our attic before pricing. Found a hidden ventilation issue everyone else missed. Saved us thousands long-term.”</p>
-            <footer><strong>Priya M.</strong><span>Waterloo · Fortress 50</span></footer>
-          </article>
-          <article class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>“Replaced our 28-year-old roof in two days. Crew showed up at 7 AM on the dot, magnetic-swept the lawn each evening, and the project manager texted me a video update every morning.”</p>
-            <footer><strong>Daniel R.</strong><span>Kitchener · Summit Stone</span></footer>
-          </article>
-          <article class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>“Active leak above the nursery — Go2 had a crew on my roof in 70 minutes with a tarp, then did a full repair that week. Honest, fast, and they didn&apos;t try to upsell me a replacement.”</p>
-            <footer><strong>Steph C.</strong><span>Cambridge · Repair</span></footer>
-          </article>
-          <article class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>“The estimator on their website was within $400 of the final invoice. That kind of accuracy says everything about how this company operates.”</p>
-            <footer><strong>James O.</strong><span>Guelph · Fortress 50</span></footer>
-          </article>
-          <article class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>“We had a chimney flashing issue that two other roofers misdiagnosed. Go2 did the thermal scan, found it in twenty minutes, and fixed it the same day under their two-year warranty.”</p>
-            <footer><strong>Mia &amp; Tom L.</strong><span>Hamilton · Leak Diagnosis</span></footer>
-          </article>
-          <article class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>“I&apos;ve managed 14 rental properties for 20 years. Go2Roofing is the only contractor I&apos;ve ever rehired without getting a competing bid. Worth every cent.”</p>
-            <footer><strong>Karim S.</strong><span>Mississauga · Multi-property</span></footer>
-          </article>
+        <div class="marquee-outer">
+          <div class="marquee-track">
+            <article class="review-card"><div class="stars">★★★★★</div><p>"Quoted three roofers — Go2 climbed into our attic before pricing. Found a hidden ventilation issue no one else caught."</p><footer><strong>Priya M.</strong><span>Waterloo</span></footer></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>"New roof in two days. Crew showed up at 7 AM, swept the lawn nightly, PM texted video updates every morning."</p><footer><strong>Daniel R.</strong><span>Kitchener</span></footer></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>"Leak above the nursery — crew on-site in 70 minutes with a tarp. Full repair that week. Zero upsell attempt."</p><footer><strong>Steph C.</strong><span>Cambridge</span></footer></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>"Their estimate was within $400 of the final invoice. That kind of accuracy says everything about how they operate."</p><footer><strong>James O.</strong><span>Guelph</span></footer></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>"Chimney flashing issue two other roofers misdiagnosed. Go2 found it in twenty minutes with thermal imaging."</p><footer><strong>Mia &amp; Tom L.</strong><span>Hamilton</span></footer></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>"14 rental properties for 20 years — Go2 is the only contractor I rehire without getting competing bids."</p><footer><strong>Karim S.</strong><span>Mississauga</span></footer></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>"Quoted three roofers — Go2 climbed into our attic before pricing. Found a hidden ventilation issue no one else caught."</p><footer><strong>Priya M.</strong><span>Waterloo</span></footer></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>"New roof in two days. Crew showed up at 7 AM, swept the lawn nightly, PM texted video updates every morning."</p><footer><strong>Daniel R.</strong><span>Kitchener</span></footer></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>"Leak above the nursery — crew on-site in 70 minutes with a tarp. Full repair that week. Zero upsell attempt."</p><footer><strong>Steph C.</strong><span>Cambridge</span></footer></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>"Their estimate was within $400 of the final invoice. That kind of accuracy says everything about how they operate."</p><footer><strong>James O.</strong><span>Guelph</span></footer></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>"Chimney flashing issue two other roofers misdiagnosed. Go2 found it in twenty minutes with thermal imaging."</p><footer><strong>Mia &amp; Tom L.</strong><span>Hamilton</span></footer></article>
+            <article class="review-card"><div class="stars">★★★★★</div><p>"14 rental properties for 20 years — Go2 is the only contractor I rehire without getting competing bids."</p><footer><strong>Karim S.</strong><span>Mississauga</span></footer></article>
+          </div>
         </div>
-      </div>
     </section>
 
     <!-- ===== FAQ ===== -->
@@ -1098,7 +930,7 @@
         <a href="#top" class="brand">
           <span class="brand-mark">
             <svg viewBox="0 0 40 40" width="32" height="32"><path d="M4 26 L20 8 L36 26 L36 34 L4 34 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M4 26 L20 16 L36 26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/></span>
-          <span class="brand-text"><strong>Go2Roofing</strong><em>Built to last. Backed for life.</em></span>
+          <span class="brand-text"><strong>Go2Roofing</strong><em>Crafted for Ontario homes.</em></span>
         </a>
         <p class="foot-blurb">Premier roofing systems for Ontario homes since 1999. W-2 crews. Lifetime warranties. Real humans answering the phone.</p>
       </div>
