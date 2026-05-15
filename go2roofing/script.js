@@ -2,6 +2,52 @@
    Go2Roofing — Interactions
    ======================================== */
 
+/* ---------- Email config ----------
+   1. Go to https://web3forms.com, enter go2roofer@gmail.com
+   2. Paste the access key you receive into WEB3FORMS_KEY below
+   3. While the key is still the placeholder, forms fall back to
+      opening the user's email client with the message pre-filled.
+------------------------------------- */
+const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_KEY_HERE';
+const EMAIL_TO = 'go2roofer@gmail.com';
+
+async function sendFormEmail({ subject, message, replyTo }) {
+  const keyConfigured = WEB3FORMS_KEY && WEB3FORMS_KEY !== 'YOUR_WEB3FORMS_KEY_HERE';
+
+  if (!keyConfigured) {
+    // Fallback: open the user's email client with pre-filled content
+    const url = 'mailto:' + EMAIL_TO
+      + '?subject=' + encodeURIComponent(subject)
+      + '&body=' + encodeURIComponent(message);
+    window.location.href = url;
+    return { success: true, fallback: true };
+  }
+
+  const data = new FormData();
+  data.append('access_key', WEB3FORMS_KEY);
+  data.append('subject', subject);
+  data.append('from_name', 'Go2Roofing Website');
+  data.append('message', message);
+  if (replyTo) data.append('replyto', replyTo);
+  data.append('botcheck', '');
+
+  const res = await fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    body: data,
+    headers: { Accept: 'application/json' }
+  });
+  const json = await res.json();
+  if (!json.success) throw new Error(json.message || 'Email send failed');
+  return json;
+}
+
+function line(label, value, width = 14) {
+  const v = value == null || value === '' ? '—' : String(value);
+  return '  ' + (label + ':').padEnd(width) + v;
+}
+
+function rule(char = '═', n = 50) { return char.repeat(n); }
+
 document.addEventListener('DOMContentLoaded', () => {
   initHeader();
   initThemeToggle();
@@ -163,13 +209,57 @@ function initLeadForm() {
     });
   });
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!validateStep()) return;
-    form.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
-    form.querySelector('.form-nav').hidden = true;
-    form.querySelector('.progress').hidden = true;
-    success.hidden = false;
+
+    const submitBtn = document.getElementById('submitBtn');
+    const originalLabel = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    const d = new FormData(form);
+    const fullName = ((d.get('firstName') || '') + ' ' + (d.get('lastName') || '')).trim();
+    const subject = 'New Lead — ' + (fullName || 'Go2Roofing') + ' · ' + (d.get('service') || 'General');
+    const message = [
+      'NEW LEAD — Go2Roofing Website',
+      rule('═'),
+      '',
+      'SERVICE REQUESTED',
+      line('Service', d.get('service')),
+      '',
+      'TIMING & BUDGET',
+      line('Timing', d.get('timing')),
+      line('Budget', d.get('budget') ? '$' + Number(d.get('budget')).toLocaleString() : '—'),
+      '',
+      'PROPERTY',
+      line('Type', d.get('propertyType')),
+      line('Storeys', d.get('storeys')),
+      line('Roof age', d.get('roofAge')),
+      line('Square ft', d.get('sqft')),
+      line('Notes', d.get('notes')),
+      '',
+      'CONTACT',
+      line('Name', fullName),
+      line('Email', d.get('email')),
+      line('Phone', d.get('phone')),
+      line('Address', d.get('address')),
+      '',
+      rule('─'),
+      'Submitted: ' + new Date().toLocaleString('en-CA', { dateStyle: 'long', timeStyle: 'short' })
+    ].join('\n');
+
+    try {
+      await sendFormEmail({ subject, message, replyTo: d.get('email') });
+      form.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+      form.querySelector('.form-nav').hidden = true;
+      form.querySelector('.progress').hidden = true;
+      success.hidden = false;
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+      alert("Sorry, we couldn't send your request. Please call (548) 255-0465 or email go2roofer@gmail.com directly.");
+    }
   });
 
   render();
@@ -542,7 +632,7 @@ function initCalculator() {
   function round100(n) { return Math.round(n / 50) * 50; }
 
   // Form submit
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const errors = validate();
     if (errors.length) {
@@ -553,14 +643,81 @@ function initCalculator() {
     }
     errorBox.hidden = true;
 
+    const submitBtn = document.getElementById('calcSubmit');
+    const originalLabel = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
     const q = compute();
-    renderQuote(q);
-    result.hidden = false;
-    form.style.opacity = '.4';
-    form.style.pointerEvents = 'none';
-    setTimeout(() => {
-      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+    const quoteId = 'GO2-' + Date.now().toString().slice(-6);
+    const pad = (s, n = 38) => String(s).padEnd(n);
+
+    const linesText = q.lines.map(l =>
+      '  ' + pad(l.label.replace(/&amp;/g, '&'), 38) + '$' + Math.round(l.amount).toLocaleString()
+    ).join('\n');
+
+    const subject = 'New Quote Request — ' + fields.name.value + ' · $' + Math.round(q.total).toLocaleString();
+    const message = [
+      'NEW QUOTE REQUEST — Go2Roofing Website',
+      rule('═'),
+      '',
+      'Quote ID: ' + quoteId,
+      '',
+      'CUSTOMER',
+      line('Name', fields.name.value),
+      line('Email', fields.email.value),
+      line('Phone', fields.phone.value),
+      line('Address', fields.address.value),
+      line('Postal', fields.postal.value),
+      '',
+      'PROPERTY',
+      line('Type', fields.type.selectedOptions[0].textContent),
+      line('Storeys', fields.storeys.value),
+      line('Sq ft', Number(fields.sqft.value).toLocaleString()),
+      line('Pitch', fields.pitch.selectedOptions[0].textContent),
+      line('Complexity', fields.complexity.selectedOptions[0].textContent),
+      line('Layers', fields.layers.selectedOptions[0].textContent),
+      line('Access', fields.access.selectedOptions[0].textContent),
+      '',
+      'SYSTEM SELECTED',
+      '  ' + q.tier.name,
+      '  ' + q.tier.warranty,
+      '',
+      'ADD-ONS',
+      line('Ice & water', fields.iws.selectedOptions[0].textContent.replace(' — $0.95/sqft', '')),
+      line('Drip edge', fields.drip.selectedOptions[0].textContent),
+      line('Skylights', (+fields.skylights.value || 0) + ' unit(s)'),
+      line('Eavestrough', (+fields.eaves.value || 0) + ' linear ft'),
+      line('Ridge vent', fields.ridge.checked ? 'Yes' : 'No'),
+      line('Snow guards', fields.snow.checked ? 'Yes' : 'No'),
+      '',
+      'ITEMIZED QUOTE',
+      rule('─'),
+      linesText,
+      rule('─'),
+      '  ' + pad('Subtotal', 38) + '$' + Math.round(q.subtotal).toLocaleString(),
+      '  ' + pad('HST (13%)', 38) + '$' + Math.round(q.tax).toLocaleString(),
+      '  ' + pad('TOTAL', 38) + '$' + Math.round(q.total).toLocaleString(),
+      '',
+      rule('─'),
+      'Submitted: ' + new Date().toLocaleString('en-CA', { dateStyle: 'long', timeStyle: 'short' })
+    ].join('\n');
+
+    try {
+      await sendFormEmail({ subject, message, replyTo: fields.email.value });
+      renderQuote(q);
+      result.hidden = false;
+      form.style.opacity = '.4';
+      form.style.pointerEvents = 'none';
+      setTimeout(() => result.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalLabel;
+      alert("Sorry, we couldn't send your quote request. Please call (548) 255-0465 or email go2roofer@gmail.com directly.");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalLabel;
+    }
   });
 
   // Reset
