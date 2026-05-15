@@ -1,0 +1,3235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Go2Roofing — Premium Roofing Contractors | Repair, Replacement & Inspections</title>
+  <meta name="description" content="Go2Roofing delivers expert roof repair, replacement, leak diagnosis, and emergency service. Licensed, insured, and rated 5 stars across Ontario." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+/* ========================================
+   Go2Roofing — Design System
+   ======================================== */
+:root {
+  --navy-950: #0a1422;
+  --navy-900: #0e1b2c;
+  --navy-800: #16263b;
+  --navy-700: #1f3552;
+  --navy-600: #2a466b;
+  --ink: #0b1726;
+  --ink-2: #233247;
+  --text: #1c2a3d;
+  --muted: #5b6b82;
+  --line: #e3e9f1;
+  --line-strong: #c8d4e3;
+  --surface: #ffffff;
+  --surface-2: #f6f9fd;
+  --surface-3: #eef3fa;
+  --accent: #f5b13a;      /* warm gold */
+  --accent-2: #ed8a2c;    /* sunset */
+  --accent-deep: #b9701c;
+  --success: #3aa56b;
+  --danger: #e2553a;
+  --info: #3a7ad9;
+
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+
+  --shadow-sm: 0 1px 2px rgba(11,23,38,.06), 0 1px 3px rgba(11,23,38,.04);
+  --shadow: 0 6px 20px rgba(11,23,38,.08), 0 2px 6px rgba(11,23,38,.05);
+  --shadow-lg: 0 24px 60px rgba(11,23,38,.18), 0 8px 18px rgba(11,23,38,.08);
+  --shadow-xl: 0 40px 100px rgba(11,23,38,.28);
+
+  --tx: cubic-bezier(.2,.65,.3,1);
+  --container: 1240px;
+}
+
+[data-theme="dark"] {
+  --ink: #e8efff;
+  --ink-2: #c2cde2;
+  --text: #d6e0f1;
+  --muted: #95a4bc;
+  --line: #1c2a3d;
+  --line-strong: #2a3a52;
+  --surface: #0c1726;
+  --surface-2: #0f1d31;
+  --surface-3: #142540;
+}
+
+/* ========================================
+   Reset
+   ======================================== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--text);
+  background: var(--surface);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--ink);
+  letter-spacing: -.01em;
+  line-height: 1.15;
+  margin: 0 0 .5em;
+}
+
+h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 800; }
+h2 { font-size: clamp(1.8rem, 3.4vw, 2.7rem); font-weight: 700; }
+h3 { font-size: 1.35rem; font-weight: 700; }
+h4 { font-size: 1.05rem; font-weight: 700; }
+h5 { font-size: .92rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--ink); margin-bottom: 1em; }
+
+p { margin: 0 0 1em; }
+a { color: inherit; text-decoration: none; transition: color .25s var(--tx); }
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; border: 0; background: 0; cursor: pointer; color: inherit; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+[hidden] { display: none !important; }
+
+.container { width: min(100% - 32px, var(--container)); margin: 0 auto; }
+
+/* ========================================
+   Buttons
+   ======================================== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: .95rem;
+  cursor: pointer;
+  transition: transform .2s var(--tx), background .2s var(--tx), box-shadow .2s var(--tx), color .2s var(--tx);
+  white-space: nowrap;
+  border: 1.5px solid transparent;
+}
+.btn-lg { padding: 16px 28px; font-size: 1rem; }
+.btn-block { width: 100%; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  color: #1a0f00;
+  box-shadow: 0 8px 22px rgba(237,138,44,.35);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(237,138,44,.45); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-ghost {
+  background: rgba(255,255,255,.06);
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+[data-theme="dark"] .btn-ghost { background: rgba(255,255,255,.04); color: var(--ink); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+/* ========================================
+   Announcement bar
+   ======================================== */
+.announce {
+  background: linear-gradient(90deg, #0a1422 0%, #1a3258 60%, #0a1422 100%);
+  color: #f1f5ff;
+  font-size: .85rem;
+  padding: 9px 0;
+}
+.announce-inner {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  flex-wrap: wrap;
+}
+.announce-cta {
+  color: var(--accent);
+  font-weight: 600;
+  padding-left: 8px;
+  border-left: 1px solid rgba(255,255,255,.15);
+}
+.pulse-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(245,177,58,.8);
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(245,177,58,.55); }
+  70%  { box-shadow: 0 0 0 10px rgba(245,177,58,0); }
+  100% { box-shadow: 0 0 0 0 rgba(245,177,58,0); }
+}
+
+/* ========================================
+   Header
+   ======================================== */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,.85);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--line);
+  transition: background .3s var(--tx), box-shadow .3s var(--tx);
+}
+[data-theme="dark"] .site-header { background: rgba(10,20,34,.85); }
+.site-header.scrolled { box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+
+.header-inner {
+  display: flex; align-items: center; gap: 24px;
+  padding: 14px 0;
+}
+.brand { display: inline-flex; align-items: center; gap: 12px; color: var(--ink); }
+.brand-mark {
+  display: grid; place-items: center;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0e1b2c, #1f3552);
+  color: var(--accent);
+}
+.brand-text strong { display: block; font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 800; color: var(--ink); }
+.brand-text em { font-style: normal; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+.nav { display: flex; gap: 6px; margin-left: auto; }
+.nav a {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: .92rem;
+  color: var(--ink-2);
+  position: relative;
+}
+.nav a:hover { color: var(--ink); background: var(--surface-2); }
+.nav a.active { color: var(--accent-deep); }
+.nav a.active::after {
+  content: ''; position: absolute; left: 14px; right: 14px; bottom: 4px;
+  height: 2px; border-radius: 2px; background: var(--accent);
+}
+
+.header-actions { display: flex; align-items: center; gap: 10px; }
+.phone-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--ink); font-weight: 600; font-size: .92rem;
+  padding: 8px 10px; border-radius: 8px;
+  white-space: nowrap;
+}
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+.phone-link:hover { color: var(--accent-deep); }
+.icon-btn {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: grid; place-items: center;
+  background: var(--surface-2);
+  color: var(--ink-2);
+  transition: background .2s var(--tx), color .2s var(--tx);
+}
+.icon-btn:hover { background: var(--surface-3); color: var(--ink); }
+.icon-btn .icon-moon { display: none; }
+[data-theme="dark"] .icon-btn .icon-sun { display: none; }
+[data-theme="dark"] .icon-btn .icon-moon { display: block; }
+
+.hamburger {
+  display: none;
+  width: 40px; height: 40px;
+  flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+.hamburger span {
+  display: block; width: 18px; height: 2px; background: var(--ink); border-radius: 2px;
+  transition: transform .25s var(--tx), opacity .25s var(--tx);
+}
+.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-nav {
+  display: none;
+  padding: 12px 16px 20px;
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+}
+.mobile-nav a { display: block; padding: 12px 8px; font-weight: 600; color: var(--ink-2); border-bottom: 1px solid var(--line); }
+.mobile-nav a:last-child { border: 0; margin-top: 12px; }
+
+/* ========================================
+   Hero
+   ======================================== */
+.hero {
+  position: relative;
+  padding: 70px 0 80px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, #c9def2 0%, #97baea 55%, #5a8bcb 100%);
+}
+.hero-sky {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255,255,255,.6), transparent 40%),
+    radial-gradient(circle at 78% 14%, rgba(255,220,160,.45), transparent 45%);
+}
+[data-theme="dark"] .hero-bg { background: linear-gradient(180deg, #0a1422 0%, #142540 60%, #1f3552 100%); }
+[data-theme="dark"] .hero-sky { background:
+  radial-gradient(circle at 18% 22%, rgba(255,255,255,.06), transparent 40%),
+  radial-gradient(circle at 78% 14%, rgba(255,200,120,.12), transparent 45%); }
+
+.hero-clouds {
+  position: absolute; left: 0; right: 0; top: 0; height: 60%;
+  animation: float 22s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-26px); }
+}
+.hero-roofs {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 220px;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 56px;
+  align-items: start;
+}
+.hero-copy { padding-top: 12px; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.85);
+  color: var(--ink-2);
+  font-size: .82rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 22px;
+}
+.dot-row { display: inline-flex; gap: 3px; }
+.dot-row span { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); display: block; }
+
+.hero h1 { color: var(--ink); }
+.hero h1 .accent {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+.lede { font-size: 1.12rem; color: var(--ink-2); max-width: 540px; }
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin: 28px 0;
+  padding: 22px;
+  background: rgba(255,255,255,.78);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-sm);
+}
+[data-theme="dark"] .hero-stats { background: rgba(15,29,49,.7); }
+.hero-stats > div strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem; font-weight: 800; color: var(--ink);
+  line-height: 1;
+}
+.hero-stats > div span { font-size: .78rem; color: var(--muted); margin-top: 4px; display: block; }
+
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+
+.hero-trust .trust-badges {
+  display: flex; gap: 14px; flex-wrap: wrap;
+}
+.badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,.85);
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: var(--shadow-sm);
+}
+[data-theme="dark"] .badge { background: rgba(15,29,49,.7); }
+.badge strong { display: block; font-size: .95rem; color: var(--ink); font-family: 'Inter', sans-serif; }
+.badge span { font-size: .75rem; color: var(--muted); }
+
+/* ========================================
+   Lead Card
+   ======================================== */
+.lead-card {
+  position: relative;
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  padding: 28px;
+  border: 1px solid var(--line);
+}
+.lead-head { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 22px; }
+.lead-icon {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--navy-900), var(--navy-700));
+  color: var(--accent);
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.lead-head h3 { margin: 0 0 4px; font-size: 1.25rem; }
+.lead-head p { margin: 0; color: var(--muted); font-size: .9rem; }
+
+/* Progress */
+.progress { margin-bottom: 24px; }
+.progress-bar {
+  height: 6px;
+  background: var(--surface-3);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+.progress-bar::after {
+  content: ''; position: absolute; inset: 0; right: auto;
+  width: 25%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-radius: 999px;
+  transition: width .45s var(--tx);
+}
+.progress-bar[data-step="1"]::after { width: 25%; }
+.progress-bar[data-step="2"]::after { width: 50%; }
+.progress-bar[data-step="3"]::after { width: 75%; }
+.progress-bar[data-step="4"]::after { width: 100%; }
+
+.progress-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 14px;
+}
+.steps { display: flex; gap: 8px; }
+.step {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--surface-3);
+  color: var(--muted);
+  font-weight: 600; font-size: .82rem;
+  display: grid; place-items: center;
+  transition: background .25s var(--tx), color .25s var(--tx), transform .25s var(--tx);
+}
+.step.active { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #1a0f00; transform: scale(1.08); }
+.step.done { background: var(--success); color: #fff; }
+.step-counter { font-size: .82rem; color: var(--muted); }
+.step-counter strong { color: var(--ink); font-weight: 700; }
+
+/* Form */
+.lead-form { display: flex; flex-direction: column; gap: 18px; }
+.step-panel { border: 0; padding: 0; margin: 0; display: none; }
+.step-panel.active { display: block; animation: panelIn .35s var(--tx); }
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.step-panel legend { padding: 0; margin-bottom: 14px; }
+.panel-title { display: block; font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.panel-sub { display: block; color: var(--muted); font-size: .88rem; }
+
+/* Choice cards */
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.choice-grid.two { grid-template-columns: repeat(2, 1fr); }
+.choice input { position: absolute; opacity: 0; }
+.choice-card {
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color .2s var(--tx), background .2s var(--tx), transform .2s var(--tx);
+  background: var(--surface);
+  height: 100%;
+}
+.choice-emoji { font-size: 1.4rem; display: block; margin-bottom: 6px; }
+.choice-card strong { display: block; font-size: .95rem; color: var(--ink); margin-bottom: 2px; }
+.choice-card small { color: var(--muted); font-size: .78rem; line-height: 1.4; }
+.choice:hover .choice-card { border-color: var(--accent); transform: translateY(-1px); }
+.choice input:checked + .choice-card {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(245,177,58,.1), rgba(237,138,44,.06));
+  box-shadow: 0 0 0 3px rgba(245,177,58,.15);
+}
+
+/* Fields */
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field > span { font-size: .84rem; color: var(--ink-2); font-weight: 500; }
+.field input, .field select, .field textarea {
+  font: inherit;
+  padding: 12px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--ink);
+  transition: border-color .2s var(--tx), box-shadow .2s var(--tx);
+  width: 100%;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(245,177,58,.18);
+}
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.field.full { grid-column: 1 / -1; }
+.field-grid + .field { margin-top: 12px; }
+
+.budget output {
+  display: inline-block;
+  margin-top: 4px;
+  font-weight: 700;
+  color: var(--accent-deep);
+  font-size: 1.1rem;
+}
+input[type="range"] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 6px;
+  background: var(--surface-3);
+  border-radius: 999px; cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: 3px solid #fff;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: 3px solid #fff;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+
+.checkbox {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: .88rem; color: var(--ink-2);
+  cursor: pointer;
+  margin-top: 4px;
+}
+.checkbox input { margin-top: 3px; accent-color: var(--accent-2); }
+
+.form-nav {
+  display: flex; gap: 10px; justify-content: space-between; margin-top: 8px;
+  padding-top: 14px; border-top: 1px solid var(--line);
+}
+
+.form-success {
+  text-align: center;
+  padding: 12px 0;
+  animation: panelIn .4s var(--tx);
+}
+.success-icon { display: grid; place-items: center; margin: 4px auto 14px; }
+.form-success h4 { font-size: 1.4rem; margin-bottom: 8px; }
+
+/* Scroll cue */
+.scroll-cue {
+  position: absolute;
+  left: 50%; bottom: 22px;
+  transform: translateX(-50%);
+  width: 26px; height: 42px;
+  border-radius: 13px;
+  border: 2px solid rgba(255,255,255,.75);
+  display: grid; place-items: flex-start; padding-top: 7px;
+}
+.scroll-cue span {
+  width: 4px; height: 8px; border-radius: 2px;
+  background: rgba(255,255,255,.85);
+  animation: scrollDot 1.6s infinite var(--tx);
+}
+@keyframes scrollDot {
+  0%   { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(12px); opacity: 0; }
+}
+
+/* ========================================
+   Brand showcase
+   ======================================== */
+.brands { background: var(--surface-2); }
+.brand-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.brand-card {
+  position: relative;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  transition: transform .3s var(--tx), border-color .3s var(--tx), box-shadow .3s var(--tx);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.brand-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--brand-color, var(--accent));
+  opacity: 0;
+  transition: opacity .3s var(--tx);
+}
+.brand-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-lg);
+}
+.brand-card:hover::before { opacity: 1; }
+.brand-card.featured { border-color: var(--accent); }
+.brand-card.featured::before { opacity: 1; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+
+.brand-ribbon {
+  position: absolute;
+  top: 18px; right: 18px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--accent);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.brand-logo {
+  width: 88px; height: 88px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--brand-color, var(--accent)) 0%, color-mix(in srgb, var(--brand-color, var(--accent)) 70%, #000) 100%);
+  display: grid; place-items: center;
+  box-shadow: 0 8px 22px color-mix(in srgb, var(--brand-color, var(--accent)) 35%, transparent);
+  position: relative;
+  overflow: hidden;
+}
+.brand-logo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.25) 0%, transparent 50%);
+  pointer-events: none;
+}
+.brand-mark {
+  background: rgba(255,255,255,.96);
+  width: 64px; height: 64px;
+  border-radius: 10px;
+  display: grid; place-items: center;
+  z-index: 1;
+}
+.brand-mark span {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: -.02em;
+  color: var(--brand-color, var(--ink));
+  font-variant-caps: all-small-caps;
+}
+
+.brand-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.25rem;
+}
+.brand-line {
+  color: var(--muted);
+  font-size: .9rem;
+  margin-bottom: 16px;
+  line-height: 1.55;
+}
+.brand-features {
+  margin-bottom: 18px;
+  flex: 1;
+}
+.brand-features li {
+  position: relative;
+  padding: 6px 0 6px 22px;
+  color: var(--ink-2);
+  font-size: .88rem;
+  border-bottom: 1px dashed var(--line);
+}
+.brand-features li:last-child { border-bottom: 0; }
+.brand-features li::before {
+  content: '✓';
+  position: absolute; left: 0; top: 6px;
+  color: var(--success);
+  font-weight: 700;
+}
+.brand-cert {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: var(--surface-2);
+  color: var(--ink-2);
+  font-size: .76rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  align-self: flex-start;
+}
+.brand-disclaimer {
+  margin: 32px 0 0;
+  text-align: center;
+  font-size: .76rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Tier brand callout */
+.tier-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  margin: 4px 0 14px;
+  border-radius: 8px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  font-size: .82rem;
+  color: var(--ink-2);
+  font-weight: 500;
+}
+.tier-brand em {
+  font-style: normal;
+  font-weight: 800;
+  font-size: .76rem;
+  letter-spacing: -.01em;
+  color: #fff;
+  background: var(--brand-color);
+  padding: 3px 7px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+/* ========================================
+   Section
+   ======================================== */
+.section { padding: 100px 0; position: relative; }
+.section-head { max-width: 760px; margin: 0 auto 56px; text-align: center; }
+.kicker {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(245,177,58,.15);
+  color: var(--accent-deep);
+  font-size: .76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  margin-bottom: 16px;
+}
+.section-head p { color: var(--muted); font-size: 1.06rem; max-width: 620px; margin-left: auto; margin-right: auto; }
+.section-head.light .kicker { background: rgba(245,177,58,.2); }
+.section-head.light h2, .section-head.light p { color: #fff; }
+.section-head.light p { color: rgba(255,255,255,.78); }
+
+/* ========================================
+   Services
+   ======================================== */
+.services { background: var(--surface); }
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.service-card {
+  position: relative;
+  padding: 32px 28px;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-lg);
+  transition: transform .35s var(--tx), border-color .35s var(--tx), box-shadow .35s var(--tx);
+  overflow: hidden;
+}
+.service-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(245,177,58,.08), rgba(237,138,44,.04));
+  opacity: 0; transition: opacity .35s var(--tx);
+  pointer-events: none;
+}
+.service-card:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: var(--shadow-lg); }
+.service-card:hover::before { opacity: 1; }
+.service-icon {
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--navy-900), var(--navy-700));
+  color: var(--accent);
+  display: grid; place-items: center;
+  margin-bottom: 20px;
+  transition: transform .35s var(--tx);
+}
+.service-card:hover .service-icon { transform: rotate(-4deg) scale(1.05); }
+.service-card h3 { margin-bottom: 10px; }
+.service-card > p { color: var(--muted); margin-bottom: 16px; font-size: .94rem; }
+.service-bullets { margin-bottom: 18px; }
+.service-bullets li {
+  position: relative;
+  padding-left: 22px;
+  font-size: .9rem;
+  color: var(--ink-2);
+  margin-bottom: 8px;
+}
+.service-bullets li::before {
+  content: '✓'; position: absolute; left: 0; top: 0;
+  color: var(--success); font-weight: 700;
+}
+.link-arrow {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-weight: 600;
+  color: var(--accent-deep);
+  font-size: .92rem;
+}
+.link-arrow:hover { gap: 8px; }
+
+.service-card.featured { border-color: var(--accent); background: linear-gradient(180deg, var(--surface) 0%, rgba(245,177,58,.04) 100%); }
+.ribbon {
+  position: absolute; top: 18px; right: -32px;
+  transform: rotate(35deg);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #1a0f00;
+  font-size: .68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em;
+  padding: 4px 36px;
+}
+
+/* ========================================
+   Process
+   ======================================== */
+.process { background: linear-gradient(180deg, var(--navy-950) 0%, var(--navy-900) 100%); color: #fff; }
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 28px;
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 38px; left: 8%; right: 8%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent) 0%, rgba(245,177,58,.2) 100%);
+}
+.timeline li { position: relative; padding-top: 80px; text-align: center; }
+.t-num {
+  position: absolute; top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #1a0f00;
+  display: grid; place-items: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 800;
+  box-shadow: 0 10px 30px rgba(245,177,58,.45);
+  z-index: 2;
+}
+.timeline h4 { color: #fff; margin-bottom: 8px; font-size: 1.05rem; }
+.timeline p { color: rgba(255,255,255,.7); font-size: .9rem; }
+
+/* ========================================
+   Leak Guide
+   ======================================== */
+.leak-guide { background: var(--surface-2); }
+.leak-tool {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.leak-questions {
+  background: var(--surface);
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+}
+.leak-q + .leak-q { margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--line); }
+.leak-q h4 { margin-bottom: 14px; font-family: 'Inter', sans-serif; font-size: .95rem; color: var(--ink-2); font-weight: 600; }
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1.5px solid var(--line);
+  color: var(--ink-2);
+  font-size: .9rem;
+  font-weight: 500;
+  transition: all .2s var(--tx);
+}
+.chip:hover { border-color: var(--accent); transform: translateY(-1px); }
+.chip.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+.leak-result {
+  position: sticky; top: 100px;
+  background: linear-gradient(160deg, var(--navy-900), var(--navy-700));
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  min-height: 320px;
+  box-shadow: var(--shadow-lg);
+}
+.leak-empty { text-align: center; opacity: .85; padding: 40px 0; color: rgba(255,255,255,.8); }
+.leak-empty svg { margin: 0 auto 14px; color: var(--accent); }
+.leak-tag {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(245,177,58,.18);
+  color: var(--accent);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.leak-card h4 { color: #fff; font-size: 1.4rem; margin-bottom: 8px; }
+.leak-card p { color: rgba(255,255,255,.78); margin-bottom: 20px; }
+.leak-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 22px; }
+.leak-meta > div {
+  background: rgba(255,255,255,.06);
+  border-radius: 12px;
+  padding: 12px;
+}
+.leak-meta span { display: block; font-size: .72rem; color: rgba(255,255,255,.6); text-transform: uppercase; letter-spacing: .12em; margin-bottom: 4px; }
+.leak-meta strong { color: var(--accent); font-size: 1.05rem; }
+
+/* ========================================
+   Products
+   ======================================== */
+.products { background: var(--surface); }
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.tier {
+  position: relative;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  transition: transform .3s var(--tx), border-color .3s var(--tx), box-shadow .3s var(--tx);
+  display: flex; flex-direction: column;
+}
+.tier:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.tier.featured {
+  border-color: var(--accent);
+  background: linear-gradient(180deg, #fff8ec 0%, var(--surface) 100%);
+  transform: scale(1.04);
+}
+[data-theme="dark"] .tier.featured { background: linear-gradient(180deg, rgba(245,177,58,.06), var(--surface) 100%); }
+.tier-head { margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+.tier-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--surface-2);
+  color: var(--ink-2);
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 12px;
+}
+.tier-tag.accent { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #1a0f00; }
+.tier-best {
+  position: absolute;
+  top: -12px; right: 24px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--accent);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.tier h3 { margin-bottom: 6px; }
+.tier-head p { color: var(--muted); margin-bottom: 12px; font-size: .9rem; }
+.tier-price { display: flex; align-items: baseline; gap: 8px; }
+.tier-price span { color: var(--muted); font-size: .82rem; }
+.tier-price strong { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--ink); font-weight: 800; }
+.tier-price em { font-style: normal; font-size: .82rem; color: var(--muted); }
+
+.tier-list { flex: 1; margin-bottom: 22px; }
+.tier-list li {
+  position: relative;
+  padding: 8px 0 8px 26px;
+  font-size: .92rem;
+  color: var(--ink-2);
+  border-bottom: 1px dashed var(--line);
+}
+.tier-list li:last-child { border: 0; }
+.tier-list li::before {
+  content: '✓'; position: absolute; left: 0; top: 8px;
+  color: var(--success); font-weight: 700;
+}
+
+/* ========================================
+   Quote Calculator
+   ======================================== */
+.calculator { background: linear-gradient(160deg, #fff8ec 0%, var(--surface) 100%); }
+[data-theme="dark"] .calculator { background: linear-gradient(160deg, rgba(245,177,58,.04), var(--surface) 100%); }
+.calc-shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+.calc-form {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  padding: 36px;
+  box-shadow: var(--shadow);
+  transition: opacity .3s var(--tx);
+}
+.calc-step + .calc-step {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.calc-step-head {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 22px;
+}
+.calc-num {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #1a0f00;
+  font-family: 'Playfair Display', serif;
+  font-weight: 800;
+  font-size: 1rem;
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.calc-step-head h3 { margin: 0; font-size: 1.3rem; }
+.calc-step-sub {
+  color: var(--muted);
+  font-size: .82rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  margin-left: auto;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.field-hint {
+  display: block;
+  margin-top: 4px;
+  font-size: .76rem;
+  color: var(--muted);
+  transition: color .2s var(--tx);
+}
+.field-hint.ok { color: var(--success); }
+.field-hint.warn { color: var(--accent-deep); }
+.field-hint.err { color: var(--danger); }
+.field > span em {
+  color: var(--danger);
+  font-style: normal;
+  margin-left: 2px;
+}
+.field.error input,
+.field.error select,
+.field.error textarea {
+  border-color: var(--danger);
+  background: rgba(226,85,58,.04);
+}
+
+.calc-tiers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.calc-tier input { position: absolute; opacity: 0; }
+.calc-tier-card {
+  position: relative;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color .2s var(--tx), background .2s var(--tx), transform .2s var(--tx);
+  height: 100%;
+}
+.calc-tier-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.calc-tier input:checked + .calc-tier-card {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(245,177,58,.1), rgba(237,138,44,.04));
+  box-shadow: 0 0 0 3px rgba(245,177,58,.18);
+}
+.calc-tier-tag {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 5px;
+  background: var(--surface-2);
+  color: var(--ink-2);
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  margin-bottom: 10px;
+}
+.calc-tier-tag.accent {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #1a0f00;
+}
+.calc-tier-card h4 { margin: 0 0 6px; }
+.calc-tier-card p { margin: 0 0 14px; font-size: .82rem; color: var(--muted); line-height: 1.5; }
+.calc-tier-card strong {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--ink);
+  font-weight: 800;
+}
+.calc-tier-card strong em { font-style: normal; font-size: .72rem; color: var(--muted); font-weight: 500; }
+
+.checkbox.addon {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  transition: border-color .2s var(--tx);
+  cursor: pointer;
+}
+.checkbox.addon:hover { border-color: var(--accent); }
+.checkbox.addon input { margin-top: 4px; accent-color: var(--accent-2); width: 18px; height: 18px; }
+.checkbox.addon span strong { display: block; color: var(--ink); margin-bottom: 2px; }
+.checkbox.addon small { color: var(--muted); font-size: .78rem; }
+
+.calc-actions {
+  display: flex; justify-content: space-between; gap: 12px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.calc-error {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: rgba(226,85,58,.08);
+  border: 1px solid rgba(226,85,58,.3);
+  border-radius: 12px;
+  color: var(--danger);
+  font-size: .9rem;
+  animation: panelIn .25s var(--tx);
+}
+.calc-error strong { display: block; margin-bottom: 6px; }
+.calc-error ul { padding-left: 18px; list-style: disc; }
+.calc-error li { margin: 2px 0; }
+
+/* Result card */
+.calc-result {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  animation: panelIn .4s var(--tx);
+}
+.calc-result-head {
+  padding: 32px 36px;
+  background: linear-gradient(135deg, var(--navy-950), var(--navy-700));
+  color: #fff;
+}
+.calc-result-head .kicker {
+  background: rgba(245,177,58,.2);
+  color: var(--accent);
+}
+.calc-result-head h3 { color: #fff; margin: 0 0 8px; font-size: 1.6rem; }
+.calc-result-head h3 span { color: var(--accent); font-family: 'Inter', sans-serif; font-weight: 600; }
+.calc-result-head p { color: rgba(255,255,255,.85); margin: 0 0 4px; }
+.calc-result-head .quote-meta { color: rgba(255,255,255,.55); font-size: .85rem; }
+
+.quote-system {
+  padding: 20px 36px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+}
+.system-pill {
+  display: inline-flex; flex-direction: column;
+  padding: 10px 18px;
+  background: var(--surface);
+  border: 1.5px solid var(--accent);
+  border-radius: 12px;
+}
+.system-label { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; }
+.system-pill strong { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--ink); }
+.system-pill small { color: var(--muted); font-size: .78rem; }
+
+.quote-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.quote-table th,
+.quote-table td {
+  padding: 14px 36px;
+  text-align: left;
+  font-size: .94rem;
+}
+.quote-table thead {
+  background: var(--surface-2);
+}
+.quote-table thead th {
+  font-size: .74rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--muted);
+  font-weight: 700;
+  padding-top: 16px;
+  padding-bottom: 12px;
+}
+.quote-table tbody tr { border-bottom: 1px dashed var(--line); }
+.quote-table tbody tr:last-child { border-bottom: 1px solid var(--line); }
+.quote-table td { color: var(--ink-2); }
+.quote-table td:first-child { color: var(--ink); font-weight: 500; }
+.quote-detail { color: var(--muted) !important; font-size: .85rem; }
+.quote-table .num { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 500; white-space: nowrap; }
+.quote-table tfoot td { padding: 12px 36px; }
+.quote-table tfoot tr:not(.quote-total) td:first-child { color: var(--ink-2); }
+.quote-table tfoot tr.quote-subtotal td { padding-top: 18px; font-weight: 600; }
+.quote-table tfoot tr.quote-total td {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--ink);
+  background: linear-gradient(180deg, rgba(245,177,58,.06), transparent);
+  border-top: 2px solid var(--accent);
+}
+.quote-table tfoot tr.quote-total .num {
+  color: var(--accent-deep);
+  font-size: 1.7rem;
+}
+
+.quote-callouts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 24px 36px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.quote-callout {
+  background: var(--surface);
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+}
+.quote-callout strong {
+  display: block;
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--accent-deep);
+  margin-bottom: 4px;
+}
+.quote-callout span { font-size: .9rem; color: var(--ink-2); }
+.quote-callout em { font-style: normal; font-weight: 700; color: var(--ink); }
+
+.quote-actions {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  padding: 28px 36px;
+}
+.quote-fineprint {
+  padding: 0 36px 28px;
+  margin: 0;
+  font-size: .78rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@media print {
+  body * { visibility: hidden; }
+  .calc-result, .calc-result * { visibility: visible; }
+  .calc-result { position: absolute; left: 0; top: 0; box-shadow: none; }
+  .quote-actions { display: none !important; }
+}
+
+/* ========================================
+   Reviews
+   ======================================== */
+.reviews { background: var(--surface-2); }
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.review-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  border: 1px solid var(--line);
+  transition: transform .25s var(--tx), box-shadow .25s var(--tx);
+}
+.review-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.stars { color: var(--accent); font-size: 1.1rem; margin-bottom: 12px; letter-spacing: 2px; }
+.review-card p { color: var(--ink-2); font-size: .95rem; line-height: 1.65; margin-bottom: 18px; }
+.review-card footer { padding-top: 14px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 2px; }
+.review-card footer strong { color: var(--ink); font-family: 'Inter', sans-serif; }
+.review-card footer span { color: var(--muted); font-size: .82rem; }
+
+/* ========================================
+   FAQ
+   ======================================== */
+.faq { background: var(--surface); }
+.faq-grid {
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 56px;
+  align-items: start;
+}
+.faq-list details {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 4px 22px;
+  margin-bottom: 12px;
+  background: var(--surface);
+  transition: border-color .2s var(--tx), box-shadow .2s var(--tx);
+}
+.faq-list details[open] { border-color: var(--accent); box-shadow: var(--shadow-sm); }
+.faq-list summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 18px 0;
+  font-weight: 600;
+  color: var(--ink);
+  position: relative;
+  padding-right: 32px;
+  font-size: 1rem;
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after {
+  content: '+';
+  position: absolute; right: 0; top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.4rem;
+  color: var(--accent-deep);
+  transition: transform .2s var(--tx);
+}
+.faq-list details[open] summary::after { content: '−'; }
+.faq-list details p {
+  color: var(--muted);
+  padding: 0 0 20px;
+  font-size: .94rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ========================================
+   Final CTA
+   ======================================== */
+.cta-final {
+  background:
+    radial-gradient(ellipse at top, rgba(245,177,58,.2), transparent 50%),
+    linear-gradient(135deg, var(--navy-950), var(--navy-800));
+  color: #fff;
+  padding: 80px 0;
+  text-align: center;
+}
+.cta-inner h2 { color: #fff; margin-bottom: 16px; }
+.cta-inner p { color: rgba(255,255,255,.78); font-size: 1.1rem; margin-bottom: 28px; }
+.cta-actions { display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.cta-final .btn-ghost { color: #fff; border-color: rgba(255,255,255,.3); }
+.cta-final .btn-ghost:hover { background: rgba(255,255,255,.1); color: var(--accent); border-color: var(--accent); }
+
+/* ========================================
+   Footer
+   ======================================== */
+.site-footer { background: var(--navy-950); color: #c8d4e3; padding: 64px 0 24px; }
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+.site-footer .brand { color: #fff; margin-bottom: 14px; }
+.site-footer .brand-text strong { color: #fff; }
+.site-footer .brand-text em { color: rgba(255,255,255,.55); }
+.site-footer .brand-mark { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #1a0f00; }
+.foot-blurb { color: rgba(255,255,255,.65); font-size: .92rem; max-width: 320px; }
+.site-footer h5 { color: #fff; }
+.site-footer ul li { padding: 6px 0; font-size: .92rem; }
+.site-footer ul li a { color: rgba(255,255,255,.7); }
+.site-footer ul li a:hover { color: var(--accent); }
+.contact-list li { display: flex; gap: 8px; }
+.foot-bottom {
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding-top: 24px;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  font-size: .82rem; color: rgba(255,255,255,.55);
+}
+.foot-links a:hover { color: var(--accent); }
+
+/* ========================================
+   Animations
+   ======================================== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .8s var(--tx), transform .8s var(--tx);
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ========================================
+   Responsive
+   ======================================== */
+@media (max-width: 1080px) {
+  .hero-content { grid-template-columns: 1fr; gap: 40px; }
+  .timeline { grid-template-columns: repeat(2, 1fr); }
+  .timeline::before { display: none; }
+  .timeline li { padding-top: 70px; text-align: left; }
+  .t-num { left: 0; transform: none; }
+  .service-grid, .tier-grid, .reviews-grid, .brand-grid { grid-template-columns: repeat(2, 1fr); }
+  .tier.featured { transform: none; }
+  .faq-grid, .leak-tool { grid-template-columns: 1fr; gap: 36px; }
+  .calc-tiers { grid-template-columns: 1fr; }
+  .calc-grid { grid-template-columns: 1fr; }
+  .calc-form { padding: 24px; }
+  .quote-callouts { grid-template-columns: 1fr; }
+  .quote-table th, .quote-table td { padding-left: 20px; padding-right: 20px; }
+  .calc-result-head, .quote-system, .quote-actions, .quote-fineprint { padding-left: 20px; padding-right: 20px; }
+  .leak-result { position: static; }
+}
+@media (max-width: 760px) {
+  .nav, .phone-link { display: none; }
+  .hamburger { display: flex; }
+  .mobile-nav { display: none; }
+  .mobile-nav.open { display: block; }
+  .header-inner { gap: 10px; padding: 12px 0; }
+  .brand-text em { display: none; }
+  .brand-mark { width: 38px; height: 38px; border-radius: 10px; }
+  .brand-mark svg { width: 30px; height: 30px; }
+  .header-actions { gap: 6px; margin-left: auto; }
+  .header-actions .btn { padding: 9px 14px; font-size: .82rem; }
+  .icon-btn { width: 36px; height: 36px; }
+  .hero { padding: 40px 0 60px; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .service-grid, .tier-grid, .reviews-grid, .brand-grid { grid-template-columns: 1fr; }
+  .timeline { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .section { padding: 70px 0; }
+  .section-head { margin-bottom: 40px; }
+  .choice-grid { grid-template-columns: 1fr 1fr; }
+  .field-grid { grid-template-columns: 1fr; }
+  .lead-card { padding: 22px; }
+  .est-card { padding: 24px; }
+  .leak-questions { padding: 22px; }
+  .est-total > strong { font-size: 2.4rem; }
+  .announce-cta { border-left: 0; padding-left: 0; }
+  .announce { font-size: .76rem; }
+}
+@media (max-width: 460px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  h1 { font-size: 2.2rem; }
+  .hero-stats { padding: 16px; }
+  .ribbon { font-size: .6rem; }
+}
+
+</style>
+</head>
+<body>
+  <!-- ===== Announcement bar ===== -->
+  <div class="announce">
+    <div class="container announce-inner">
+      <span class="pulse-dot"></span>
+      <span>24/7 Storm &amp; Emergency Leak Response — average on-site time under 90 minutes</span>
+      <a href="#contact" class="announce-cta">Get help now →</a>
+    </div>
+  </div>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#top" class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" width="36" height="36">
+            <path d="M4 26 L20 8 L36 26 L36 34 L4 34 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M4 26 L20 16 L36 26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle cx="20" cy="22" r="1.6" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <strong>Go2Roofing</strong>
+          <em>Built to last. Backed for life.</em>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#leak-guide">Leak Guide</a>
+        <a href="#products">Materials</a>
+        <a href="#estimator">Estimator</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="4" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/><line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/><line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/><line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/></g></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20"><path d="M21 13.5A9 9 0 1 1 10.5 3a7 7 0 0 0 10.5 10.5z" fill="currentColor"/></svg>
+        </button>
+        <a href="tel:+15482550465" class="phone-link">
+          <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z"/></svg>
+          (548) 255-0465
+        </a>
+        <a href="#contact" class="btn btn-primary">Free Estimate</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#leak-guide">Leak Guide</a>
+      <a href="#products">Materials</a>
+      <a href="#estimator">Estimator</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="btn btn-primary btn-block">Free Estimate</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-sky"></div>
+        <svg class="hero-clouds" viewBox="0 0 1440 400" preserveAspectRatio="none">
+          <path d="M0,260 C200,210 360,290 540,250 C720,210 880,300 1080,260 C1260,225 1380,270 1440,255 L1440,400 L0,400 Z" fill="rgba(255,255,255,0.12)"/>
+          <path d="M0,300 C220,260 400,330 600,300 C820,265 980,340 1200,310 C1340,290 1400,310 1440,305 L1440,400 L0,400 Z" fill="rgba(255,255,255,0.18)"/>
+        </svg>
+        <svg class="hero-roofs" viewBox="0 0 1440 240" preserveAspectRatio="none">
+          <polygon points="0,240 0,160 120,80 260,160 260,240" fill="#0e1b2c"/>
+          <polygon points="220,240 220,150 360,70 500,150 500,240" fill="#16263b"/>
+          <polygon points="460,240 460,140 620,50 780,140 780,240" fill="#0e1b2c"/>
+          <polygon points="740,240 740,150 880,70 1020,150 1020,240" fill="#16263b"/>
+          <polygon points="980,240 980,160 1120,80 1260,160 1260,240" fill="#0e1b2c"/>
+          <polygon points="1220,240 1220,150 1360,70 1500,150 1500,240" fill="#16263b"/>
+        </svg>
+      </div>
+
+      <div class="container hero-content">
+        <div class="hero-copy">
+          <div class="eyebrow">
+            <span class="dot-row"><span></span><span></span><span></span></span>
+            Ontario&apos;s top-rated roofing crew · 4,800+ roofs installed
+          </div>
+          <h1>The last roof <span class="accent">your home</span> will ever need.</h1>
+          <p class="lede">
+            Go2Roofing replaces, repairs, and protects roofs with engineered systems built for
+            ice, wind, and the worst Ontario winters. Lifetime workmanship warranty. Zero-pressure quotes.
+          </p>
+
+          <div class="hero-stats">
+            <div><strong data-count="4800">0</strong><span>Roofs delivered</span></div>
+            <div><strong data-count="27">0</strong><span>Years in business</span></div>
+            <div><strong data-count="50">0</strong><span>Year material warranty</span></div>
+            <div><strong data-count="98">0</strong><span>% client satisfaction</span></div>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary btn-lg">
+              Get my free estimate
+              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M5 12h12l-5-5 1.4-1.4L20.8 12l-7.4 6.4L12 17l5-5H5z"/></svg>
+            </a>
+            <a href="#leak-guide" class="btn btn-ghost btn-lg">
+              <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+              Diagnose my leak
+            </a>
+          </div>
+
+          <div class="hero-trust">
+            <div class="trust-badges">
+              <div class="badge">
+                <svg viewBox="0 0 24 24" width="22" height="22"><path fill="#f5b13a" d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1z"/></svg>
+                <div><strong>4.9 / 5.0</strong><span>1,820+ reviews</span></div>
+              </div>
+              <div class="badge">
+                <svg viewBox="0 0 24 24" width="22" height="22"><path fill="#3aa56b" d="M12 1l9 4v6c0 5-3.8 9.6-9 11-5.2-1.4-9-6-9-11V5l9-4z"/><path d="M8 12l3 3 5-5" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <div><strong>Fully insured</strong><span>$5M liability</span></div>
+              </div>
+              <div class="badge">
+                <svg viewBox="0 0 24 24" width="22" height="22"><path fill="#3a7ad9" d="M4 4h16v4H4zM4 10h10v10H4zM16 10h4v10h-4z"/></svg>
+                <div><strong>BBB A+</strong><span>Accredited since 2002</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== Multi-step lead form ===== -->
+        <aside class="lead-card" id="contact">
+          <div class="lead-head">
+            <div class="lead-icon">
+              <svg viewBox="0 0 40 40" width="28" height="28"><path d="M6 24L20 10L34 24V32H6Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M6 24L20 16L34 24" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h3>Get your free roof assessment</h3>
+              <p>Takes 60 seconds. No spam. No pressure.</p>
+            </div>
+          </div>
+
+          <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+            <div class="progress-meta">
+              <div class="steps">
+                <span class="step active" data-step="1">1</span>
+                <span class="step" data-step="2">2</span>
+                <span class="step" data-step="3">3</span>
+                <span class="step" data-step="4">4</span>
+              </div>
+              <div class="step-counter">Step <strong id="stepNum">1</strong> / 4</div>
+            </div>
+          </div>
+
+          <form class="lead-form" id="leadForm" novalidate>
+            <!-- Step 1: Service -->
+            <fieldset class="step-panel active" data-panel="1">
+              <legend>
+                <span class="panel-title">What do you need help with?</span>
+                <span class="panel-sub">Pick the option that best fits — you can change it later.</span>
+              </legend>
+              <div class="choice-grid">
+                <label class="choice">
+                  <input type="radio" name="service" value="Replacement" required />
+                  <div class="choice-card">
+                    <span class="choice-emoji">🏠</span>
+                    <strong>Full Replacement</strong>
+                    <small>Re-roof with new system + warranty</small>
+                  </div>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="service" value="Repair" />
+                  <div class="choice-card">
+                    <span class="choice-emoji">🔧</span>
+                    <strong>Repair</strong>
+                    <small>Small fixes, missing shingles, flashing</small>
+                  </div>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="service" value="Leak" />
+                  <div class="choice-card">
+                    <span class="choice-emoji">💧</span>
+                    <strong>Active Leak</strong>
+                    <small>Water coming inside the home</small>
+                  </div>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="service" value="Inspection" />
+                  <div class="choice-card">
+                    <span class="choice-emoji">🔍</span>
+                    <strong>Inspection</strong>
+                    <small>Pre-purchase or annual checkup</small>
+                  </div>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="service" value="Eaves" />
+                  <div class="choice-card">
+                    <span class="choice-emoji">🌧️</span>
+                    <strong>Eavestrough</strong>
+                    <small>Gutters, downspouts, guards</small>
+                  </div>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="service" value="Skylight" />
+                  <div class="choice-card">
+                    <span class="choice-emoji">☀️</span>
+                    <strong>Skylight</strong>
+                    <small>Install or replace skylights</small>
+                  </div>
+                </label>
+              </div>
+            </fieldset>
+
+            <!-- Step 2: Property -->
+            <fieldset class="step-panel" data-panel="2">
+              <legend>
+                <span class="panel-title">Tell us about the property</span>
+                <span class="panel-sub">Rough estimates are fine — we&apos;ll confirm on site.</span>
+              </legend>
+              <div class="field-grid">
+                <label class="field">
+                  <span>Property type</span>
+                  <select name="propertyType" required>
+                    <option value="">Select…</option>
+                    <option>Single-family home</option>
+                    <option>Townhome</option>
+                    <option>Duplex / Triplex</option>
+                    <option>Commercial</option>
+                    <option>Cottage / Rural</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Number of storeys</span>
+                  <select name="storeys" required>
+                    <option value="">Select…</option>
+                    <option>1</option><option>1.5</option><option>2</option><option>2.5</option><option>3+</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Approx. roof age</span>
+                  <select name="roofAge">
+                    <option value="">Not sure</option>
+                    <option>Under 5 years</option>
+                    <option>5–10 years</option>
+                    <option>10–15 years</option>
+                    <option>15–20 years</option>
+                    <option>20+ years</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Approx. square footage</span>
+                  <input type="number" name="sqft" min="200" max="20000" placeholder="e.g. 1800" />
+                </label>
+              </div>
+              <div class="field">
+                <span>Anything else we should know?</span>
+                <textarea name="notes" rows="3" placeholder="Active leak above kitchen? Insurance claim? Skylight included?"></textarea>
+              </div>
+            </fieldset>
+
+            <!-- Step 3: Timing -->
+            <fieldset class="step-panel" data-panel="3">
+              <legend>
+                <span class="panel-title">When would you like work to start?</span>
+                <span class="panel-sub">We&apos;ll match you to the next available certified crew.</span>
+              </legend>
+              <div class="choice-grid two">
+                <label class="choice">
+                  <input type="radio" name="timing" value="ASAP" required />
+                  <div class="choice-card"><strong>ASAP — Emergency</strong><small>Active leak / storm damage</small></div>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="timing" value="2 weeks" />
+                  <div class="choice-card"><strong>Within 2 weeks</strong><small>Priority scheduling</small></div>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="timing" value="1–2 months" />
+                  <div class="choice-card"><strong>1–2 months</strong><small>Most popular window</small></div>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="timing" value="Just exploring" />
+                  <div class="choice-card"><strong>Just exploring</strong><small>Planning &amp; budgeting</small></div>
+                </label>
+              </div>
+              <label class="field budget">
+                <span>Budget comfort (slide to share, optional)</span>
+                <input type="range" id="budgetSlider" name="budget" min="2000" max="40000" step="500" value="12000" />
+                <output id="budgetOut">$12,000</output>
+              </label>
+            </fieldset>
+
+            <!-- Step 4: Contact -->
+            <fieldset class="step-panel" data-panel="4">
+              <legend>
+                <span class="panel-title">Where should we send your estimate?</span>
+                <span class="panel-sub">We&apos;ll never sell your data. Promise.</span>
+              </legend>
+              <div class="field-grid">
+                <label class="field">
+                  <span>First name *</span>
+                  <input type="text" name="firstName" required placeholder="Jane" />
+                </label>
+                <label class="field">
+                  <span>Last name *</span>
+                  <input type="text" name="lastName" required placeholder="Doe" />
+                </label>
+                <label class="field">
+                  <span>Email</span>
+                  <input type="email" name="email" placeholder="jane@email.com" />
+                </label>
+                <label class="field">
+                  <span>Phone</span>
+                  <input type="tel" name="phone" placeholder="(548) 255-0465" />
+                </label>
+                <label class="field full">
+                  <span>Property address</span>
+                  <input type="text" name="address" placeholder="123 Maple St, Kitchener ON" />
+                </label>
+              </div>
+              <label class="checkbox">
+                <input type="checkbox" name="consent" required />
+                <span>I agree to be contacted by Go2Roofing about my request.</span>
+              </label>
+            </fieldset>
+
+            <div class="form-nav">
+              <button type="button" class="btn btn-ghost" id="prevBtn" disabled>← Back</button>
+              <button type="button" class="btn btn-primary" id="nextBtn">Continue →</button>
+              <button type="submit" class="btn btn-primary" id="submitBtn" hidden>Send my request</button>
+            </div>
+
+            <div class="form-success" id="formSuccess" hidden>
+              <div class="success-icon">
+                <svg viewBox="0 0 52 52" width="52" height="52"><circle cx="26" cy="26" r="24" fill="none" stroke="#3aa56b" stroke-width="3"/><path d="M14 27l8 8 16-18" fill="none" stroke="#3aa56b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <h4>Got it — your request is in.</h4>
+              <p>A Go2Roofing project advisor will reach out within <strong>30 minutes</strong> during business hours (8 AM – 8 PM ET).</p>
+              <a href="#services" class="btn btn-ghost">Explore our services</a>
+            </div>
+          </form>
+        </aside>
+      </div>
+
+      <a href="#services" class="scroll-cue" aria-label="Scroll to services">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ===== Brand showcase ===== -->
+    <section class="section brands" id="brands">
+      <div class="container">
+        <header class="section-head">
+          <span class="kicker">Materials we install</span>
+          <h2>Premium shingle systems from trusted manufacturers.</h2>
+          <p>Certified installer for North America&apos;s leading roofing brands. Every system carries the full manufacturer warranty plus our lifetime workmanship guarantee.</p>
+        </header>
+
+        <div class="brand-grid">
+          <article class="brand-card" data-brand="iko">
+            <div class="brand-logo" style="--brand-color:#c8232b;">
+              <div class="brand-mark"><span>IKO</span></div>
+            </div>
+            <h3>IKO Cambridge</h3>
+            <p class="brand-line">Dual-layer laminated architectural shingles. Industry-leading wind resistance, available in 12 designer colours.</p>
+            <ul class="brand-features">
+              <li>30-year limited warranty</li>
+              <li>110 mph wind rating</li>
+              <li>Class A fire rating</li>
+            </ul>
+            <span class="brand-cert">Certified Shield Pro+ installer</span>
+          </article>
+
+          <article class="brand-card featured" data-brand="gaf">
+            <span class="brand-ribbon">Most popular</span>
+            <div class="brand-logo" style="--brand-color:#0072ce;">
+              <div class="brand-mark"><span>GAF</span></div>
+            </div>
+            <h3>GAF Timberline HDZ</h3>
+            <p class="brand-line">North America&apos;s #1 selling shingle. StainGuard Plus&trade; algae protection and patented LayerLock&trade; technology.</p>
+            <ul class="brand-features">
+              <li>Lifetime limited warranty</li>
+              <li>130 mph WindProven&trade; warranty</li>
+              <li>StainGuard Plus algae protection</li>
+            </ul>
+            <span class="brand-cert">Certified Master Elite&reg; installer</span>
+          </article>
+
+          <article class="brand-card" data-brand="certainteed">
+            <div class="brand-logo" style="--brand-color:#0d7041;">
+              <div class="brand-mark"><span>CT</span></div>
+            </div>
+            <h3>CertainTeed Landmark</h3>
+            <p class="brand-line">Designer-quality architectural shingles in two-piece laminate construction. Rich shadow lines, premium colour blends.</p>
+            <ul class="brand-features">
+              <li>Lifetime limited warranty</li>
+              <li>110 mph wind rating</li>
+              <li>StreakFighter&reg; algae resistance</li>
+            </ul>
+            <span class="brand-cert">SELECT ShingleMaster&trade; installer</span>
+          </article>
+
+          <article class="brand-card" data-brand="owens">
+            <div class="brand-logo" style="--brand-color:#e6007e;">
+              <div class="brand-mark"><span>OC</span></div>
+            </div>
+            <h3>Owens Corning Duration</h3>
+            <p class="brand-line">SureNail&reg; technology — the only triple-layer reinforced nailing zone in the industry. Engineered for high-wind regions.</p>
+            <ul class="brand-features">
+              <li>Lifetime limited warranty</li>
+              <li>130 mph wind rating</li>
+              <li>Patented SureNail&reg; strip</li>
+            </ul>
+            <span class="brand-cert">Platinum Preferred contractor</span>
+          </article>
+
+          <article class="brand-card" data-brand="malarkey">
+            <div class="brand-logo" style="--brand-color:#1b5e3a;">
+              <div class="brand-mark"><span>MK</span></div>
+            </div>
+            <h3>Malarkey Vista AR</h3>
+            <p class="brand-line">Polymer-modified asphalt shingles. Class-4 impact rating means insurance discounts on most policies.</p>
+            <ul class="brand-features">
+              <li>Class-4 impact resistance</li>
+              <li>Cool roof reflective options</li>
+              <li>Smog-reducing 3M granules</li>
+            </ul>
+            <span class="brand-cert">Emerald Premier Contractor</span>
+          </article>
+
+          <article class="brand-card" data-brand="velux">
+            <div class="brand-logo" style="--brand-color:#003c71;">
+              <div class="brand-mark"><span>VX</span></div>
+            </div>
+            <h3>Velux Skylights</h3>
+            <p class="brand-line">Solar-powered fresh-air skylights with rain sensors, factory-finished flashing kits matched to your shingle profile.</p>
+            <ul class="brand-features">
+              <li>10-year no-leak guarantee</li>
+              <li>Solar Bonus eligible</li>
+              <li>Smart blinds &amp; remote control</li>
+            </ul>
+            <span class="brand-cert">5-Star Skylight Specialist</span>
+          </article>
+        </div>
+
+        <p class="brand-disclaimer">All trademarks are the property of their respective owners. Go2Roofing is an authorized installer, not a manufacturer.</p>
+      </div>
+    </section>
+
+    <!-- ===== Services ===== -->
+    <section class="section services" id="services">
+      <div class="container">
+        <header class="section-head">
+          <span class="kicker">What we do</span>
+          <h2>Complete rooftop systems — installed once, guaranteed for life.</h2>
+          <p>Every Go2Roofing project ships with a written lifetime workmanship warranty and a manufacturer-backed material warranty up to 50 years.</p>
+        </header>
+
+        <div class="service-grid">
+          <article class="service-card" data-tilt>
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" width="32" height="32"><path d="M6 28L24 10L42 28V40H6Z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M14 40V26h20v14" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>
+            </div>
+            <h3>Roof Replacement</h3>
+            <p>Full tear-off, deck inspection, ice &amp; water shield, synthetic underlay, premium architectural shingles, and ridge ventilation.</p>
+            <ul class="service-bullets">
+              <li>Lifetime workmanship warranty</li>
+              <li>Up to 50-yr material coverage</li>
+              <li>Same-week start available</li>
+            </ul>
+            <a href="#contact" class="link-arrow">Book a free quote →</a>
+          </article>
+
+          <article class="service-card featured" data-tilt>
+            <div class="ribbon">Most requested</div>
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" width="32" height="32"><path d="M10 36l10-22 8 16 4-8 6 14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Roof Repair</h3>
+            <p>Targeted repairs for missing shingles, lifted flashing, vent boots, and skylight curbs — without overselling a full re-roof.</p>
+            <ul class="service-bullets">
+              <li>$0 second opinions</li>
+              <li>Same-day service in most regions</li>
+              <li>2-year repair warranty</li>
+            </ul>
+            <a href="#contact" class="link-arrow">Schedule a repair →</a>
+          </article>
+
+          <article class="service-card" data-tilt>
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" width="32" height="32"><path d="M24 6c-6 9-12 14-12 22a12 12 0 0 0 24 0c0-8-6-13-12-22z" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>
+            </div>
+            <h3>Leak Diagnosis</h3>
+            <p>Drone scan, attic moisture mapping, and infrared thermography pinpoint the source — not just the symptom.</p>
+            <ul class="service-bullets">
+              <li>Drone + thermal imaging</li>
+              <li>Insurance-ready report</li>
+              <li>Emergency tarp same day</li>
+            </ul>
+            <a href="#leak-guide" class="link-arrow">Try our leak guide →</a>
+          </article>
+
+          <article class="service-card" data-tilt>
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" width="32" height="32"><rect x="6" y="14" width="36" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M10 18l14 10 14-10" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>
+            </div>
+            <h3>Eavestrough &amp; Gutters</h3>
+            <p>Seamless 5&quot; &amp; 6&quot; aluminum eaves, oversized downspouts, leaf guards, and ice-dam prevention systems.</p>
+            <ul class="service-bullets">
+              <li>Seamless on-site fabrication</li>
+              <li>Heated cable add-on</li>
+              <li>10-year leak-proof warranty</li>
+            </ul>
+            <a href="#contact" class="link-arrow">Price my eaves →</a>
+          </article>
+
+          <article class="service-card" data-tilt>
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" width="32" height="32"><circle cx="24" cy="24" r="6" fill="none" stroke="currentColor" stroke-width="2.4"/><g stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="24" y1="6" x2="24" y2="10"/><line x1="24" y1="38" x2="24" y2="42"/><line x1="6" y1="24" x2="10" y2="24"/><line x1="38" y1="24" x2="42" y2="24"/><line x1="11" y1="11" x2="14" y2="14"/><line x1="34" y1="34" x2="37" y2="37"/><line x1="11" y1="37" x2="14" y2="34"/><line x1="34" y1="14" x2="37" y2="11"/></g></svg>
+            </div>
+            <h3>Skylights</h3>
+            <p>Velux 5-Star certified installs &amp; replacements — flashing kits matched to your shingle profile for a permanent watertight seal.</p>
+            <ul class="service-bullets">
+              <li>Solar-powered fresh-air models</li>
+              <li>Smart blinds &amp; rain sensors</li>
+              <li>10-year no-leak guarantee</li>
+            </ul>
+            <a href="#products" class="link-arrow">Compare skylights →</a>
+          </article>
+
+          <article class="service-card" data-tilt>
+            <div class="service-icon">
+              <svg viewBox="0 0 48 48" width="32" height="32"><path d="M24 4l4 8 8 1-6 6 2 9-8-4-8 4 2-9-6-6 8-1z" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>
+            </div>
+            <h3>Annual Inspections</h3>
+            <p>Twice-a-year preventative health checks + a 40-point report card. Free for current Go2 customers under warranty.</p>
+            <ul class="service-bullets">
+              <li>Drone imagery + photo report</li>
+              <li>Attic ventilation audit</li>
+              <li>Real estate / pre-purchase</li>
+            </ul>
+            <a href="#contact" class="link-arrow">Reserve inspection →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Process ===== -->
+    <section class="section process" id="process">
+      <div class="container">
+        <header class="section-head light">
+          <span class="kicker">How it works</span>
+          <h2>Five clear steps. No surprises.</h2>
+          <p>From the first phone call to the final inspection, every milestone is documented and approved by you.</p>
+        </header>
+
+        <ol class="timeline">
+          <li>
+            <span class="t-num">01</span>
+            <h4>Free on-site assessment</h4>
+            <p>A licensed Go2Roofing project advisor inspects your roof, attic, and ventilation — using drones where access is unsafe.</p>
+          </li>
+          <li>
+            <span class="t-num">02</span>
+            <h4>Written, itemized quote</h4>
+            <p>Within 24 hours you receive a transparent quote — labour, materials, dump fees, and warranty all itemized. No high-pressure sales.</p>
+          </li>
+          <li>
+            <span class="t-num">03</span>
+            <h4>Pick your system</h4>
+            <p>Compare shingle lines, colours, and upgrades using your custom proposal portal — share with your partner before deciding.</p>
+          </li>
+          <li>
+            <span class="t-num">04</span>
+            <h4>Install in 1–3 days</h4>
+            <p>Tear-off, deck repair, and install handled by our W-2 (not subcontracted) crews. Daily clean-up. Magnetic nail sweeps every evening.</p>
+          </li>
+          <li>
+            <span class="t-num">05</span>
+            <h4>Final walkthrough &amp; warranty</h4>
+            <p>Project manager walks your roofline with you, registers your warranty, and schedules your free 12-month inspection.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== Roof Leak Guide ===== -->
+    <section class="section leak-guide" id="leak-guide">
+      <div class="container">
+        <header class="section-head">
+          <span class="kicker">Interactive tool</span>
+          <h2>Find your leak in 90 seconds.</h2>
+          <p>Tell us what you&apos;re seeing and we&apos;ll narrow the most likely cause — and what it usually costs to fix.</p>
+        </header>
+
+        <div class="leak-tool">
+          <div class="leak-questions">
+            <div class="leak-q" data-q="1">
+              <h4>1. Where is the water showing up?</h4>
+              <div class="chip-row">
+                <button type="button" class="chip" data-key="ceiling">Ceiling stain</button>
+                <button type="button" class="chip" data-key="wall">Down a wall</button>
+                <button type="button" class="chip" data-key="attic">In the attic</button>
+                <button type="button" class="chip" data-key="chimney">Around chimney</button>
+                <button type="button" class="chip" data-key="window">Around a window</button>
+              </div>
+            </div>
+            <div class="leak-q" data-q="2">
+              <h4>2. When did it start?</h4>
+              <div class="chip-row">
+                <button type="button" class="chip" data-key="storm">After a storm</button>
+                <button type="button" class="chip" data-key="thaw">During a thaw</button>
+                <button type="button" class="chip" data-key="random">Random — no pattern</button>
+                <button type="button" class="chip" data-key="years">Years of slow stains</button>
+              </div>
+            </div>
+            <div class="leak-q" data-q="3">
+              <h4>3. How old is the roof?</h4>
+              <div class="chip-row">
+                <button type="button" class="chip" data-key="new">Under 10 years</button>
+                <button type="button" class="chip" data-key="mid">10–18 years</button>
+                <button type="button" class="chip" data-key="old">Older than 18 years</button>
+                <button type="button" class="chip" data-key="unknown">Not sure</button>
+              </div>
+            </div>
+          </div>
+
+          <aside class="leak-result" id="leakResult">
+            <div class="leak-empty">
+              <svg viewBox="0 0 64 64" width="56" height="56"><path d="M32 6c-9 14-18 22-18 34a18 18 0 0 0 36 0c0-12-9-20-18-34z" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+              <p>Answer the three questions and your most likely cause will appear here.</p>
+            </div>
+            <div class="leak-card" hidden>
+              <span class="leak-tag" id="leakTag">Most likely cause</span>
+              <h4 id="leakTitle"></h4>
+              <p id="leakDetail"></p>
+              <div class="leak-meta">
+                <div><span>Typical repair</span><strong id="leakCost"></strong></div>
+                <div><span>Urgency</span><strong id="leakUrgency"></strong></div>
+              </div>
+              <a href="#contact" class="btn btn-primary btn-block">Book a free leak diagnosis</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Product comparison ===== -->
+    <section class="section products" id="products">
+      <div class="container">
+        <header class="section-head">
+          <span class="kicker">Materials</span>
+          <h2>Choose a roof system tuned for your home.</h2>
+          <p>Hover or tap each tier to see what&apos;s included. All systems include synthetic underlayment, ice &amp; water shield, and ventilation balancing.</p>
+        </header>
+
+        <div class="tier-grid">
+          <article class="tier" data-tier="essential">
+            <div class="tier-head">
+              <span class="tier-tag">Essential</span>
+              <h3>Shield 30</h3>
+              <p>For starter homes &amp; rentals.</p>
+              <span class="tier-brand"><em style="--brand-color:#c8232b;">IKO</em> Cambridge</span>
+              <div class="tier-price"><span>from</span><strong>$7,900</strong><em>installed</em></div>
+            </div>
+            <ul class="tier-list">
+              <li>30-year architectural shingles</li>
+              <li>Synthetic underlayment</li>
+              <li>3 ft ice &amp; water shield</li>
+              <li>Aluminum drip edge</li>
+              <li>5-year workmanship warranty</li>
+            </ul>
+            <a href="#contact" class="btn btn-ghost btn-block">Quote Shield 30</a>
+          </article>
+
+          <article class="tier featured" data-tier="signature">
+            <div class="tier-head">
+              <span class="tier-tag accent">Signature</span>
+              <span class="tier-best">Most popular</span>
+              <h3>Fortress 50</h3>
+              <p>The sweet spot for Ontario homes.</p>
+              <span class="tier-brand"><em style="--brand-color:#0072ce;">GAF</em> Timberline HDZ</span>
+              <div class="tier-price"><span>from</span><strong>$11,400</strong><em>installed</em></div>
+            </div>
+            <ul class="tier-list">
+              <li>50-year architectural laminate shingles</li>
+              <li>Premium synthetic underlay</li>
+              <li>6 ft ice &amp; water shield</li>
+              <li>Aluminum drip edge + step flashing</li>
+              <li>Ridge venting balance audit</li>
+              <li>Lifetime workmanship warranty</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary btn-block">Quote Fortress 50</a>
+          </article>
+
+          <article class="tier" data-tier="elite">
+            <div class="tier-head">
+              <span class="tier-tag">Elite</span>
+              <h3>Summit Stone</h3>
+              <p>Designer impact-rated systems.</p>
+              <span class="tier-brand"><em style="--brand-color:#0d7041;">CT</em> CertainTeed Landmark</span>
+              <div class="tier-price"><span>from</span><strong>$18,600</strong><em>installed</em></div>
+            </div>
+            <ul class="tier-list">
+              <li>Class-4 impact designer shingles</li>
+              <li>Self-adhered underlayment (full deck)</li>
+              <li>Ice &amp; water shield full perimeter</li>
+              <li>Copper or pre-painted accents</li>
+              <li>Smart attic ventilation system</li>
+              <li>Insurance discount paperwork included</li>
+            </ul>
+            <a href="#contact" class="btn btn-ghost btn-block">Quote Summit Stone</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Quote Calculator ===== -->
+    <section class="section calculator" id="estimator">
+      <div class="container">
+        <header class="section-head">
+          <span class="kicker">Kitchener-Waterloo · Cambridge · Guelph</span>
+          <h2>Build your itemized roofing quote.</h2>
+          <p>Real Go2Roofing pricing for the K-W region — fill in your home details and get a transparent, line-by-line estimate in under two minutes.</p>
+        </header>
+
+        <div class="calc-shell">
+          <form class="calc-form" id="calcForm" novalidate>
+            <!-- Step 1: Property -->
+            <div class="calc-step">
+              <div class="calc-step-head">
+                <span class="calc-num">01</span>
+                <h3>Property details</h3>
+              </div>
+              <div class="calc-grid">
+                <label class="field">
+                  <span>Postal code <em>*</em></span>
+                  <input type="text" name="postal" id="calcPostal" required maxlength="7" placeholder="N2L 3G1" autocomplete="postal-code" />
+                  <small class="field-hint" id="postalHint">We service postal codes starting with N1, N2, N3 (K-W region).</small>
+                </label>
+                <label class="field">
+                  <span>Property type <em>*</em></span>
+                  <select name="propertyType" id="calcType" required>
+                    <option value="">Select…</option>
+                    <option value="house" data-mult="1.0">Detached house</option>
+                    <option value="semi" data-mult="0.92">Semi-detached</option>
+                    <option value="town" data-mult="0.85">Townhouse</option>
+                    <option value="bungalow" data-mult="0.95">Bungalow</option>
+                    <option value="rural" data-mult="1.08">Cottage / Rural</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Number of storeys <em>*</em></span>
+                  <select name="storeys" id="calcStoreys" required>
+                    <option value="">Select…</option>
+                    <option value="1" data-mult="1.0">1 storey</option>
+                    <option value="1.5" data-mult="1.05">1.5 storey</option>
+                    <option value="2" data-mult="1.10">2 storey</option>
+                    <option value="2.5" data-mult="1.18">2.5 storey</option>
+                    <option value="3" data-mult="1.28">3+ storey</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Roof square footage <em>*</em></span>
+                  <input type="number" name="sqft" id="calcSqft" required min="400" max="12000" step="50" placeholder="e.g. 1800" />
+                  <small class="field-hint">Not sure? Roof area ≈ home footprint × 1.3</small>
+                </label>
+                <label class="field">
+                  <span>Roof pitch <em>*</em></span>
+                  <select name="pitch" id="calcPitch" required>
+                    <option value="">Select…</option>
+                    <option value="low" data-mult="1.00">Low (2/12 – 4/12) — walkable</option>
+                    <option value="med" data-mult="1.10">Average (5/12 – 7/12)</option>
+                    <option value="steep" data-mult="1.25">Steep (8/12 – 10/12) — requires harness</option>
+                    <option value="extreme" data-mult="1.45">Very steep (12/12+) — scaffold</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Roof complexity <em>*</em></span>
+                  <select name="complexity" id="calcComplex" required>
+                    <option value="">Select…</option>
+                    <option value="simple" data-mult="1.00">Simple — single gable</option>
+                    <option value="hip" data-mult="1.08">Hip roof</option>
+                    <option value="dormer" data-mult="1.18">Has dormers / valleys</option>
+                    <option value="cutup" data-mult="1.30">Multiple peaks &amp; dormers</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Existing roof layers to remove <em>*</em></span>
+                  <select name="layers" id="calcLayers" required>
+                    <option value="">Select…</option>
+                    <option value="0">No tear-off (new construction)</option>
+                    <option value="1">1 layer</option>
+                    <option value="2">2 layers</option>
+                    <option value="3">3 layers (max code)</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Access difficulty <em>*</em></span>
+                  <select name="access" id="calcAccess" required>
+                    <option value="">Select…</option>
+                    <option value="easy" data-mult="1.00">Easy — driveway access</option>
+                    <option value="normal" data-mult="1.06">Normal</option>
+                    <option value="tight" data-mult="1.15">Tight — narrow lot or fence</option>
+                    <option value="restricted" data-mult="1.28">Restricted — alley / no driveway</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <!-- Step 2: System -->
+            <div class="calc-step">
+              <div class="calc-step-head">
+                <span class="calc-num">02</span>
+                <h3>Choose your system</h3>
+              </div>
+              <div class="calc-tiers">
+                <label class="calc-tier">
+                  <input type="radio" name="tier" value="shield30" required />
+                  <div class="calc-tier-card">
+                    <span class="calc-tier-tag">Essential</span>
+                    <h4>Shield 30</h4>
+                    <p>30-yr architectural shingles<br/>5-yr workmanship warranty</p>
+                    <strong>$4.40 <em>/ sq ft</em></strong>
+                  </div>
+                </label>
+                <label class="calc-tier">
+                  <input type="radio" name="tier" value="fortress50" checked />
+                  <div class="calc-tier-card">
+                    <span class="calc-tier-tag accent">Most popular</span>
+                    <h4>Fortress 50</h4>
+                    <p>50-yr laminate shingles<br/>Lifetime workmanship warranty</p>
+                    <strong>$6.30 <em>/ sq ft</em></strong>
+                  </div>
+                </label>
+                <label class="calc-tier">
+                  <input type="radio" name="tier" value="summit" />
+                  <div class="calc-tier-card">
+                    <span class="calc-tier-tag">Premium</span>
+                    <h4>Summit Stone</h4>
+                    <p>Class-4 impact designer<br/>Insurance discount eligible</p>
+                    <strong>$10.40 <em>/ sq ft</em></strong>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Step 3: Add-ons -->
+            <div class="calc-step">
+              <div class="calc-step-head">
+                <span class="calc-num">03</span>
+                <h3>Upgrades &amp; add-ons</h3>
+                <span class="calc-step-sub">Optional</span>
+              </div>
+              <div class="calc-grid">
+                <label class="field">
+                  <span>Ice &amp; water shield coverage</span>
+                  <select name="iws" id="calcIws">
+                    <option value="3ft" data-rate="180">3 ft at eaves (code minimum)</option>
+                    <option value="6ft" data-rate="340" selected>6 ft at eaves (recommended)</option>
+                    <option value="perimeter" data-rate="640">Full perimeter + valleys</option>
+                    <option value="full" data-rate="0.95">Full deck (best for ice damming) — $0.95/sqft</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Drip edge &amp; flashing</span>
+                  <select name="drip" id="calcDrip">
+                    <option value="aluminum" data-rate="0">Aluminum (included)</option>
+                    <option value="painted" data-rate="320">Pre-painted aluminum (+$320)</option>
+                    <option value="copper" data-rate="1450">Copper accents (+$1,450)</option>
+                  </select>
+                </label>
+                <label class="field">
+                  <span>Skylights to install / replace</span>
+                  <input type="number" name="skylights" id="calcSkylights" min="0" max="12" step="1" value="0" placeholder="0" />
+                  <small class="field-hint">$1,250 each (replacement) — includes flashing kit</small>
+                </label>
+                <label class="field">
+                  <span>Eavestrough replacement (linear feet)</span>
+                  <input type="number" name="eaves" id="calcEaves" min="0" max="400" step="5" value="0" placeholder="0" />
+                  <small class="field-hint">$11 / linear foot — seamless aluminum</small>
+                </label>
+                <label class="checkbox addon">
+                  <input type="checkbox" name="ridge" id="calcRidge" checked />
+                  <span><strong>Ridge venting + balance audit</strong> — $480<br/><small>Highly recommended for ice-dam &amp; mold prevention</small></span>
+                </label>
+                <label class="checkbox addon">
+                  <input type="checkbox" name="snowGuards" id="calcSnow" />
+                  <span><strong>Snow guards</strong> — $24 each (auto-calc)<br/><small>Prevent ice avalanches over walkways &amp; doors</small></span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Step 4: Contact -->
+            <div class="calc-step">
+              <div class="calc-step-head">
+                <span class="calc-num">04</span>
+                <h3>Where should we send your quote?</h3>
+              </div>
+              <div class="calc-grid">
+                <label class="field">
+                  <span>Full name <em>*</em></span>
+                  <input type="text" name="name" id="calcName" required placeholder="Jane Doe" autocomplete="name" />
+                </label>
+                <label class="field">
+                  <span>Email <em>*</em></span>
+                  <input type="email" name="email" id="calcEmail" required placeholder="jane@email.com" autocomplete="email" />
+                </label>
+                <label class="field">
+                  <span>Phone <em>*</em></span>
+                  <input type="tel" name="phone" id="calcPhone" required placeholder="(548) 255-0465" autocomplete="tel" />
+                </label>
+                <label class="field">
+                  <span>Property address</span>
+                  <input type="text" name="address" id="calcAddress" placeholder="123 Maple St, Kitchener" autocomplete="street-address" />
+                </label>
+              </div>
+            </div>
+
+            <div class="calc-actions">
+              <button type="reset" class="btn btn-ghost" id="calcReset">Reset</button>
+              <button type="submit" class="btn btn-primary btn-lg" id="calcSubmit">
+                Calculate my quote
+                <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M5 12h12l-5-5 1.4-1.4L20.8 12l-7.4 6.4L12 17l5-5H5z"/></svg>
+              </button>
+            </div>
+
+            <div class="calc-error" id="calcError" hidden>
+              <strong>Please complete the highlighted fields.</strong>
+              <ul id="calcErrorList"></ul>
+            </div>
+          </form>
+
+          <!-- Quote Result -->
+          <aside class="calc-result" id="calcResult" hidden>
+            <div class="calc-result-head">
+              <span class="kicker">Your itemized quote</span>
+              <h3 id="quoteTitle">Quote #<span id="quoteId"></span></h3>
+              <p id="quoteCustomer"></p>
+              <p class="quote-meta"><span id="quoteAddress"></span> · <span id="quoteDate"></span></p>
+            </div>
+
+            <div class="quote-system" id="quoteSystem"></div>
+
+            <table class="quote-table">
+              <thead>
+                <tr><th>Line item</th><th>Detail</th><th class="num">Amount</th></tr>
+              </thead>
+              <tbody id="quoteLines"></tbody>
+              <tfoot>
+                <tr class="quote-subtotal"><td colspan="2">Subtotal</td><td class="num" id="quoteSubtotal"></td></tr>
+                <tr><td colspan="2">HST (13%)</td><td class="num" id="quoteTax"></td></tr>
+                <tr class="quote-total"><td colspan="2">Estimated total</td><td class="num" id="quoteTotal"></td></tr>
+              </tfoot>
+            </table>
+
+            <div class="quote-callouts">
+              <div class="quote-callout">
+                <strong>Financing</strong>
+                <span>0% APR for 12 months — approx. <em id="quoteFinance"></em>/mo</span>
+              </div>
+              <div class="quote-callout">
+                <strong>Validity</strong>
+                <span>This estimate is valid for <em>30 days</em> from today</span>
+              </div>
+              <div class="quote-callout">
+                <strong>Confidence</strong>
+                <span>± 8% — final on-site inspection is always free</span>
+              </div>
+            </div>
+
+            <div class="quote-actions">
+              <button type="button" class="btn btn-primary btn-lg" id="quoteBook">Book my free on-site visit</button>
+              <button type="button" class="btn btn-ghost" id="quotePrint">🖨 Print / Save PDF</button>
+              <button type="button" class="btn btn-ghost" id="quoteEdit">← Edit inputs</button>
+            </div>
+
+            <p class="quote-fineprint">
+              Estimate based on inputs provided. Final invoice may vary depending on hidden deck damage, code upgrades, or material market fluctuation. Go2Roofing&apos;s on-site visit will lock in the price. Lifetime workmanship warranty included on Fortress 50 &amp; Summit Stone systems.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Reviews ===== -->
+    <section class="section reviews" id="reviews">
+      <div class="container">
+        <header class="section-head">
+          <span class="kicker">What homeowners say</span>
+          <h2>1,820+ five-star reviews and counting.</h2>
+        </header>
+
+        <div class="reviews-grid" id="reviewsGrid">
+          <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>“Quoted three roofers — Go2 was the only crew who climbed into our attic before pricing. Found a hidden ventilation issue everyone else missed. Saved us thousands long-term.”</p>
+            <footer><strong>Priya M.</strong><span>Waterloo · Fortress 50</span></footer>
+          </article>
+          <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>“Replaced our 28-year-old roof in two days. Crew showed up at 7 AM on the dot, magnetic-swept the lawn each evening, and the project manager texted me a video update every morning.”</p>
+            <footer><strong>Daniel R.</strong><span>Kitchener · Summit Stone</span></footer>
+          </article>
+          <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>“Active leak above the nursery — Go2 had a crew on my roof in 70 minutes with a tarp, then did a full repair that week. Honest, fast, and they didn&apos;t try to upsell me a replacement.”</p>
+            <footer><strong>Steph C.</strong><span>Cambridge · Repair</span></footer>
+          </article>
+          <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>“The estimator on their website was within $400 of the final invoice. That kind of accuracy says everything about how this company operates.”</p>
+            <footer><strong>James O.</strong><span>Guelph · Fortress 50</span></footer>
+          </article>
+          <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>“We had a chimney flashing issue that two other roofers misdiagnosed. Go2 did the thermal scan, found it in twenty minutes, and fixed it the same day under their two-year warranty.”</p>
+            <footer><strong>Mia &amp; Tom L.</strong><span>Hamilton · Leak Diagnosis</span></footer>
+          </article>
+          <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>“I&apos;ve managed 14 rental properties for 20 years. Go2Roofing is the only contractor I&apos;ve ever rehired without getting a competing bid. Worth every cent.”</p>
+            <footer><strong>Karim S.</strong><span>Mississauga · Multi-property</span></footer>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section faq" id="faq">
+      <div class="container faq-grid">
+        <div>
+          <span class="kicker">Answers up front</span>
+          <h2>Questions we hear every week.</h2>
+          <p>Don&apos;t see your question? Drop it in the form above — a real Go2Roofing advisor (never a chatbot) will reply within an hour.</p>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>How long does a roof replacement actually take?</summary>
+            <p>For a typical Ontario home (1,800–2,400 sq ft), our W-2 crews complete tear-off and installation in 1–3 days. Larger homes, steep pitches, or multi-layer tear-offs extend that to 4–5 days. You&apos;ll get a written day-by-day schedule before we start.</p>
+          </details>
+          <details>
+            <summary>What does Go2Roofing&apos;s warranty actually cover?</summary>
+            <p>Every system ships with a lifetime workmanship warranty (transferable once if you sell) and the manufacturer&apos;s material warranty (30, 50, or lifetime depending on tier). Workmanship issues are remediated at zero cost — including labour, materials, and any interior repairs caused by the original install.</p>
+          </details>
+          <details>
+            <summary>Do you offer financing?</summary>
+            <p>Yes — 0% APR for 12 months and up to 120-month extended plans through our financing partner. Soft credit pulls only, decisions in under 5 minutes. Ask your advisor for current promos.</p>
+          </details>
+          <details>
+            <summary>What happens if it rains during install?</summary>
+            <p>Our crews monitor radar in 15-minute increments. If weather closes in, we tarp and seal every exposed deck section before leaving the site. Your home is never left vulnerable overnight — guaranteed in writing.</p>
+          </details>
+          <details>
+            <summary>Can I just repair my roof instead of replacing it?</summary>
+            <p>Often, yes. If your roof is under 15 years and the damage is localized, a targeted repair is the right answer — and we&apos;ll tell you that even if it&apos;s a smaller invoice for us. Go2 advisors are salaried, not commissioned.</p>
+          </details>
+          <details>
+            <summary>Are you insured? Licensed?</summary>
+            <p>Fully. $5M liability insurance, WSIB clearance on file, and certified Master Elite (GAF), Shield Pro+ (IKO), and SELECT (CertainTeed) installer. We&apos;ll email you all three on request before signing anything.</p>
+          </details>
+          <details>
+            <summary>Do you handle insurance claims?</summary>
+            <p>Yes. Storm/hail/wind damage assessments include a full photo + thermal report formatted for adjuster review. We can also meet your adjuster on-site at no charge.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Final CTA ===== -->
+    <section class="cta-final">
+      <div class="container cta-inner">
+        <h2>Ready for the last roof you&apos;ll ever need?</h2>
+        <p>Free on-site assessment. Written quote in 24 hours. Zero pressure to commit.</p>
+        <div class="cta-actions">
+          <a href="#contact" class="btn btn-primary btn-lg">Get my free estimate</a>
+          <a href="tel:+15482550465" class="btn btn-ghost btn-lg">📞 (548) 255-0465</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="#top" class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 40 40" width="32" height="32"><path d="M4 26 L20 8 L36 26 L36 34 L4 34 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M4 26 L20 16 L36 26" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/></span>
+          <span class="brand-text"><strong>Go2Roofing</strong><em>Built to last. Backed for life.</em></span>
+        </a>
+        <p class="foot-blurb">Premier roofing systems for Ontario homes since 1999. W-2 crews. Lifetime warranties. Real humans answering the phone.</p>
+      </div>
+
+      <div>
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Roof Replacement</a></li>
+          <li><a href="#services">Roof Repair</a></li>
+          <li><a href="#leak-guide">Leak Diagnosis</a></li>
+          <li><a href="#services">Eavestrough</a></li>
+          <li><a href="#services">Skylights</a></li>
+          <li><a href="#services">Inspections</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>Service area</h5>
+        <ul>
+          <li>Kitchener / Waterloo</li>
+          <li>Cambridge / Guelph</li>
+          <li>Hamilton / Burlington</li>
+          <li>Mississauga / Brampton</li>
+          <li>Toronto (west)</li>
+          <li>Niagara region</li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>Get in touch</h5>
+        <ul class="contact-list">
+          <li>📞 <a href="tel:+15482550465">(548) 255-0465</a></li>
+          <li>✉️ <a href="mailto:go2roofer@gmail.com">go2roofer@gmail.com</a></li>
+          <li>📍 412 Industrial Rd, Kitchener ON</li>
+          <li>🕗 Mon–Sat · 8 AM – 8 PM ET</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container foot-bottom">
+      <span>© <span id="year"></span> Go2Roofing Inc. Licensed &amp; insured in Ontario.</span>
+      <span class="foot-links"><a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Warranty</a></span>
+    </div>
+  </footer>
+
+  <script>
+/* ========================================
+   Go2Roofing — Interactions
+   ======================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+  initHeader();
+  initThemeToggle();
+  initMobileNav();
+  initCounters();
+  initLeadForm();
+  initLeakGuide();
+  initCalculator();
+  initRevealAnimations();
+  initScrollSpy();
+  initBudgetSlider();
+  document.getElementById('year').textContent = new Date().getFullYear();
+});
+
+/* ---------- Sticky header shadow ---------- */
+function initHeader() {
+  const header = document.getElementById('siteHeader');
+  const update = () => {
+    if (window.scrollY > 8) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+}
+
+/* ---------- Theme toggle ---------- */
+function initThemeToggle() {
+  const toggle = document.getElementById('themeToggle');
+  const saved = localStorage.getItem('g2r-theme');
+  if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  toggle.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('g2r-theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('g2r-theme', 'dark');
+    }
+  });
+}
+
+/* ---------- Mobile nav ---------- */
+function initMobileNav() {
+  const burger = document.getElementById('hamburger');
+  const nav = document.getElementById('mobileNav');
+  if (!burger) return;
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    nav.classList.toggle('open');
+  });
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    nav.classList.remove('open');
+  }));
+}
+
+/* ---------- Animated counters ---------- */
+function initCounters() {
+  const counters = document.querySelectorAll('[data-count]');
+  if (!counters.length) return;
+  const animate = (el) => {
+    const target = parseInt(el.dataset.count, 10);
+    const duration = 1600;
+    const start = performance.now();
+    const tick = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.floor(target * eased).toLocaleString();
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toLocaleString();
+    };
+    requestAnimationFrame(tick);
+  };
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { animate(e.target); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.3 });
+  counters.forEach(c => obs.observe(c));
+}
+
+/* ---------- Multi-step lead form ---------- */
+function initLeadForm() {
+  const form = document.getElementById('leadForm');
+  if (!form) return;
+
+  const panels = form.querySelectorAll('.step-panel');
+  const stepDots = document.querySelectorAll('.step');
+  const stepNum = document.getElementById('stepNum');
+  const bar = document.getElementById('progressBar');
+  const prev = document.getElementById('prevBtn');
+  const next = document.getElementById('nextBtn');
+  const submit = document.getElementById('submitBtn');
+  const success = document.getElementById('formSuccess');
+  let current = 1;
+  const total = panels.length;
+
+  const render = () => {
+    panels.forEach(p => p.classList.toggle('active', +p.dataset.panel === current));
+    stepDots.forEach(d => {
+      const n = +d.dataset.step;
+      d.classList.toggle('active', n === current);
+      d.classList.toggle('done', n < current);
+    });
+    bar.dataset.step = current;
+    stepNum.textContent = current;
+    prev.disabled = current === 1;
+    next.hidden = current === total;
+    submit.hidden = current !== total;
+  };
+
+  const validateStep = () => {
+    const panel = form.querySelector(`.step-panel[data-panel="${current}"]`);
+    const required = panel.querySelectorAll('[required]');
+    let ok = true;
+    let firstInvalid = null;
+    required.forEach(field => {
+      if (field.type === 'radio') {
+        const group = form.querySelectorAll(`input[name="${field.name}"]`);
+        const checked = Array.from(group).some(r => r.checked);
+        if (!checked) { ok = false; if (!firstInvalid) firstInvalid = field; }
+      } else if (!field.value.trim()) {
+        ok = false;
+        field.style.borderColor = 'var(--danger)';
+        if (!firstInvalid) firstInvalid = field;
+        field.addEventListener('input', () => { field.style.borderColor = ''; }, { once: true });
+      }
+    });
+    if (!ok && firstInvalid) {
+      const choiceCard = firstInvalid.closest('.choice-grid');
+      if (choiceCard) choiceCard.animate(
+        [{ transform: 'translateX(0)' }, { transform: 'translateX(-6px)' }, { transform: 'translateX(6px)' }, { transform: 'translateX(0)' }],
+        { duration: 280 }
+      );
+      else firstInvalid.focus();
+    }
+    return ok;
+  };
+
+  next.addEventListener('click', () => {
+    if (!validateStep()) return;
+    if (current < total) { current++; render(); }
+  });
+  prev.addEventListener('click', () => {
+    if (current > 1) { current--; render(); }
+  });
+  stepDots.forEach(d => d.addEventListener('click', () => {
+    const target = +d.dataset.step;
+    if (target < current) { current = target; render(); }
+  }));
+
+  // Auto-advance on choice select (step 1 and 3)
+  form.querySelectorAll('.choice input').forEach(input => {
+    input.addEventListener('change', () => {
+      if (input.checked && current < total) {
+        setTimeout(() => { current++; render(); }, 280);
+      }
+    });
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!validateStep()) return;
+    form.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    form.querySelector('.form-nav').hidden = true;
+    form.querySelector('.progress').hidden = true;
+    success.hidden = false;
+  });
+
+  render();
+}
+
+/* ---------- Budget slider ---------- */
+function initBudgetSlider() {
+  const slider = document.getElementById('budgetSlider');
+  const out = document.getElementById('budgetOut');
+  if (!slider || !out) return;
+  const fmt = (v) => '$' + Number(v).toLocaleString();
+  const update = () => out.textContent = fmt(slider.value);
+  slider.addEventListener('input', update);
+  update();
+}
+
+/* ---------- Leak guide ---------- */
+function initLeakGuide() {
+  const tool = document.querySelector('.leak-tool');
+  if (!tool) return;
+  const state = { 1: null, 2: null, 3: null };
+  const result = document.getElementById('leakResult');
+  const empty = result.querySelector('.leak-empty');
+  const card = result.querySelector('.leak-card');
+  const tagEl = document.getElementById('leakTag');
+  const titleEl = document.getElementById('leakTitle');
+  const detailEl = document.getElementById('leakDetail');
+  const costEl = document.getElementById('leakCost');
+  const urgEl = document.getElementById('leakUrgency');
+
+  tool.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const q = +chip.closest('.leak-q').dataset.q;
+      chip.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      state[q] = chip.dataset.key;
+      maybeShowResult();
+    });
+  });
+
+  function maybeShowResult() {
+    if (!state[1] || !state[2] || !state[3]) return;
+    const r = diagnose(state);
+    empty.hidden = true; card.hidden = false;
+    tagEl.textContent = r.tag;
+    titleEl.textContent = r.title;
+    detailEl.textContent = r.detail;
+    costEl.textContent = r.cost;
+    urgEl.textContent = r.urgency;
+    card.animate([
+      { opacity: 0, transform: 'translateY(8px)' },
+      { opacity: 1, transform: 'translateY(0)' }
+    ], { duration: 380, easing: 'cubic-bezier(.2,.65,.3,1)' });
+  }
+
+  function diagnose(s) {
+    // Storm + ceiling/wall on a mid-to-old roof: lifted shingles/flashing
+    if (s[2] === 'storm') {
+      return {
+        tag: 'Most likely cause',
+        title: 'Wind-lifted shingles or flashing',
+        detail: 'High winds during the storm have likely pulled up shingle tabs or step flashing along a valley or wall intersection. Water is now entering at the seam.',
+        cost: '$280 – $950',
+        urgency: 'Within 7 days'
+      };
+    }
+    if (s[2] === 'thaw') {
+      return {
+        tag: 'Most likely cause',
+        title: 'Ice damming at the eaves',
+        detail: 'Snow melts on the warm part of the roof and re-freezes at the cold eave, backing water up under the shingles. The fix is venting + ice & water shield, not just clearing the ice.',
+        cost: '$420 – $1,600',
+        urgency: 'Within 14 days'
+      };
+    }
+    if (s[1] === 'chimney') {
+      return {
+        tag: 'Most likely cause',
+        title: 'Failed chimney flashing',
+        detail: 'Chimney counter-flashing and step flashing fail long before the rest of the roof. A re-flash with new ice & water shield typically solves it for another 15+ years.',
+        cost: '$650 – $1,800',
+        urgency: 'Within 30 days'
+      };
+    }
+    if (s[1] === 'window') {
+      return {
+        tag: 'Most likely cause',
+        title: 'Sidewall step-flashing leak',
+        detail: 'Where a sloped roof meets a wall above a window, step flashing is the seal. When it lifts or rusts, water tracks down inside the wall cavity.',
+        cost: '$380 – $1,200',
+        urgency: 'Within 14 days'
+      };
+    }
+    if (s[3] === 'old' || s[2] === 'years') {
+      return {
+        tag: 'Most likely cause',
+        title: 'End-of-life shingle failure',
+        detail: 'Cracked, curled, or balding shingles let water through in dozens of small spots at once. Patches buy time but a full replacement is the durable fix.',
+        cost: '$8,500 – $18,000',
+        urgency: 'Plan within 6 months'
+      };
+    }
+    if (s[1] === 'attic') {
+      return {
+        tag: 'Most likely cause',
+        title: 'Ventilation condensation',
+        detail: 'Often misdiagnosed as a leak — warm humid air condenses on cold roof sheathing and drips. The fix is balancing intake (soffit) and exhaust (ridge) ventilation.',
+        cost: '$520 – $1,400',
+        urgency: 'Within 30 days'
+      };
+    }
+    return {
+      tag: 'Most likely cause',
+      title: 'Penetration boot failure',
+      detail: 'Plumbing stacks, exhaust vents, and bath fans use rubber boots that crack within 8–12 years. A targeted boot replacement is fast and inexpensive.',
+      cost: '$220 – $480',
+      urgency: 'Within 30 days'
+    };
+  }
+}
+
+/* ---------- Quote Calculator ---------- */
+function initCalculator() {
+  const form = document.getElementById('calcForm');
+  if (!form) return;
+
+  const TIER_INFO = {
+    shield30:  { name: 'Shield 30',     rate: 4.40, warranty: '30-year shingle / 5-year workmanship' },
+    fortress50:{ name: 'Fortress 50',   rate: 6.30, warranty: '50-year shingle / Lifetime workmanship' },
+    summit:    { name: 'Summit Stone',  rate: 10.40, warranty: 'Class-4 impact / Lifetime workmanship' }
+  };
+  const LABOUR_RATE = 1.85;     // $ / sqft baseline
+  const TEAROFF_RATE = 0.85;    // $ / sqft per layer
+  const DISPOSAL_RATE = 0.42;   // $ / sqft per layer
+  const UNDERLAY_RATE = 0.45;   // $ / sqft synthetic
+  const PERMIT_FEE = 185;       // fixed
+  const HST = 0.13;
+  const KW_PREFIXES = ['N1', 'N2', 'N3'];
+
+  // Cache fields
+  const f = (id) => document.getElementById(id);
+  const fields = {
+    postal:    f('calcPostal'),
+    type:      f('calcType'),
+    storeys:   f('calcStoreys'),
+    sqft:      f('calcSqft'),
+    pitch:     f('calcPitch'),
+    complexity:f('calcComplex'),
+    layers:    f('calcLayers'),
+    access:    f('calcAccess'),
+    iws:       f('calcIws'),
+    drip:      f('calcDrip'),
+    skylights: f('calcSkylights'),
+    eaves:     f('calcEaves'),
+    ridge:     f('calcRidge'),
+    snow:      f('calcSnow'),
+    name:      f('calcName'),
+    email:     f('calcEmail'),
+    phone:     f('calcPhone'),
+    address:   f('calcAddress')
+  };
+  const errorBox = f('calcError');
+  const errorList = f('calcErrorList');
+  const result = f('calcResult');
+  const postalHint = f('postalHint');
+
+  // Live postal validation feedback
+  fields.postal.addEventListener('input', () => {
+    const v = fields.postal.value.replace(/\s+/g, '').toUpperCase();
+    fields.postal.value = v.length > 3 ? v.slice(0, 3) + ' ' + v.slice(3, 6) : v;
+    if (v.length >= 2) {
+      const prefix = v.slice(0, 2);
+      if (KW_PREFIXES.includes(prefix)) {
+        postalHint.textContent = '✓ ' + cityForPostal(prefix) + ' — fully serviced.';
+        postalHint.className = 'field-hint ok';
+      } else if (v.startsWith('N')) {
+        postalHint.textContent = 'Slightly outside our core area — service available with travel fee.';
+        postalHint.className = 'field-hint warn';
+      } else {
+        postalHint.textContent = '⚠ Outside our K-W service region. Submit anyway and we&apos;ll refer you to a partner.';
+        postalHint.className = 'field-hint err';
+      }
+    } else {
+      postalHint.textContent = 'We service postal codes starting with N1, N2, N3 (K-W region).';
+      postalHint.className = 'field-hint';
+    }
+  });
+
+  function cityForPostal(prefix) {
+    if (prefix === 'N2') return 'Kitchener-Waterloo / Cambridge';
+    if (prefix === 'N1') return 'Guelph area';
+    if (prefix === 'N3') return 'Cambridge / Brantford area';
+    return 'Ontario southwest';
+  }
+
+  // Phone format helper
+  fields.phone.addEventListener('input', () => {
+    const d = fields.phone.value.replace(/\D/g, '').slice(0, 10);
+    let v = d;
+    if (d.length > 6) v = `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`;
+    else if (d.length > 3) v = `(${d.slice(0,3)}) ${d.slice(3)}`;
+    else if (d.length > 0) v = `(${d}`;
+    fields.phone.value = v;
+  });
+
+  // Validation
+  function validate() {
+    const errors = [];
+    const required = [
+      ['postal', 'Postal code'],
+      ['type', 'Property type'],
+      ['storeys', 'Number of storeys'],
+      ['sqft', 'Roof square footage'],
+      ['pitch', 'Roof pitch'],
+      ['complexity', 'Roof complexity'],
+      ['layers', 'Existing layers'],
+      ['access', 'Access difficulty'],
+      ['name', 'Full name'],
+      ['email', 'Email'],
+      ['phone', 'Phone']
+    ];
+
+    // Clear previous error states
+    form.querySelectorAll('.field.error').forEach(el => el.classList.remove('error'));
+
+    required.forEach(([k, label]) => {
+      const el = fields[k];
+      if (!el.value || !el.value.toString().trim()) {
+        errors.push(label + ' is required');
+        el.closest('.field')?.classList.add('error');
+      }
+    });
+
+    // Tier
+    const tier = form.querySelector('input[name="tier"]:checked');
+    if (!tier) errors.push('Choose a roofing system tier');
+
+    // Sqft sanity
+    const sqft = +fields.sqft.value;
+    if (sqft && (sqft < 400 || sqft > 12000)) {
+      errors.push('Roof square footage should be between 400 and 12,000');
+      fields.sqft.closest('.field')?.classList.add('error');
+    }
+
+    // Email format
+    if (fields.email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email.value)) {
+      errors.push('Email looks invalid');
+      fields.email.closest('.field')?.classList.add('error');
+    }
+
+    // Phone format
+    if (fields.phone.value && fields.phone.value.replace(/\D/g,'').length < 10) {
+      errors.push('Phone must be 10 digits');
+      fields.phone.closest('.field')?.classList.add('error');
+    }
+
+    // Postal
+    if (fields.postal.value && !/^[A-Z]\d[A-Z]\s?\d[A-Z]\d$/.test(fields.postal.value.toUpperCase())) {
+      errors.push('Postal code format should be like N2L 3G1');
+      fields.postal.closest('.field')?.classList.add('error');
+    }
+
+    return errors;
+  }
+
+  // Pricing engine
+  function compute() {
+    const sqft = +fields.sqft.value;
+    const tierKey = form.querySelector('input[name="tier"]:checked').value;
+    const tier = TIER_INFO[tierKey];
+
+    // Multipliers
+    const pitchMult = +fields.pitch.selectedOptions[0].dataset.mult;
+    const complexMult = +fields.complexity.selectedOptions[0].dataset.mult;
+    const storeyMult = +fields.storeys.selectedOptions[0].dataset.mult;
+    const accessMult = +fields.access.selectedOptions[0].dataset.mult;
+    const typeMult = +fields.type.selectedOptions[0].dataset.mult;
+    const layers = +fields.layers.value;
+
+    // Lines
+    const lines = [];
+
+    // Material (shingles + accessories baked into tier rate)
+    const matCost = round100(sqft * tier.rate);
+    lines.push({
+      label: tier.name + ' shingle system',
+      detail: sqft.toLocaleString() + ' sqft × $' + tier.rate.toFixed(2) + '/sqft',
+      amount: matCost
+    });
+
+    // Labour
+    const labourBase = sqft * LABOUR_RATE;
+    const labourTotal = round100(labourBase * pitchMult * complexMult * storeyMult * accessMult * typeMult);
+    const detailParts = [];
+    if (pitchMult > 1) detailParts.push('pitch ×' + pitchMult.toFixed(2));
+    if (complexMult > 1) detailParts.push('complexity ×' + complexMult.toFixed(2));
+    if (storeyMult > 1) detailParts.push('storeys ×' + storeyMult.toFixed(2));
+    if (accessMult > 1) detailParts.push('access ×' + accessMult.toFixed(2));
+    if (typeMult !== 1) detailParts.push('property ×' + typeMult.toFixed(2));
+    lines.push({
+      label: 'Professional installation labour',
+      detail: detailParts.length ? detailParts.join(' · ') : 'Standard rate',
+      amount: labourTotal
+    });
+
+    // Tear-off + disposal
+    if (layers > 0) {
+      const tearoff = round100(sqft * TEAROFF_RATE * layers);
+      const disposal = round100(sqft * DISPOSAL_RATE * layers);
+      lines.push({ label: 'Tear-off existing roof', detail: layers + ' layer' + (layers>1?'s':'') + ' × $' + TEAROFF_RATE.toFixed(2) + '/sqft', amount: tearoff });
+      lines.push({ label: 'Disposal &amp; dump fees', detail: layers + ' layer' + (layers>1?'s':'') + ' to landfill', amount: disposal });
+    }
+
+    // Synthetic underlay
+    const underlay = round100(sqft * UNDERLAY_RATE);
+    lines.push({ label: 'Synthetic underlayment', detail: 'Full deck coverage', amount: underlay });
+
+    // Ice & water shield
+    const iwsOpt = fields.iws.selectedOptions[0];
+    const iwsRate = +iwsOpt.dataset.rate;
+    const iwsLabel = iwsOpt.textContent.trim();
+    let iwsAmount;
+    if (iwsRate < 5) iwsAmount = round100(sqft * iwsRate);
+    else iwsAmount = iwsRate;
+    lines.push({ label: 'Ice &amp; water shield', detail: iwsLabel.replace(' — $0.95/sqft',''), amount: iwsAmount });
+
+    // Drip edge upgrade
+    const dripOpt = fields.drip.selectedOptions[0];
+    const dripRate = +dripOpt.dataset.rate;
+    if (dripRate > 0) {
+      lines.push({ label: 'Drip edge &amp; flashing upgrade', detail: dripOpt.textContent.trim().replace(/ \(\+\$.*\)/,''), amount: dripRate });
+    } else {
+      lines.push({ label: 'Drip edge &amp; flashing', detail: 'Standard aluminum (included)', amount: 0 });
+    }
+
+    // Ridge venting
+    if (fields.ridge.checked) {
+      lines.push({ label: 'Ridge venting + balance audit', detail: 'Improves attic airflow', amount: 480 });
+    }
+
+    // Skylights
+    const skyCount = +fields.skylights.value || 0;
+    if (skyCount > 0) {
+      lines.push({ label: 'Skylight replacement', detail: skyCount + ' unit' + (skyCount>1?'s':'') + ' × $1,250', amount: skyCount * 1250 });
+    }
+
+    // Eaves
+    const eavesLf = +fields.eaves.value || 0;
+    if (eavesLf > 0) {
+      lines.push({ label: 'Seamless eavestrough', detail: eavesLf + ' lin ft × $11/lf', amount: eavesLf * 11 });
+    }
+
+    // Snow guards (estimate count from perimeter)
+    if (fields.snow.checked) {
+      const perimeter = Math.round(Math.sqrt(sqft) * 4); // rough perimeter
+      const guardCount = Math.ceil(perimeter / 4);
+      lines.push({ label: 'Snow guards', detail: '~' + guardCount + ' units × $24', amount: guardCount * 24 });
+    }
+
+    // Permit
+    lines.push({ label: 'Municipal permit &amp; inspection', detail: 'City of ' + cityForPostal(fields.postal.value.slice(0,2)).split(' ')[0], amount: PERMIT_FEE });
+
+    const subtotal = lines.reduce((s, l) => s + l.amount, 0);
+    const tax = Math.round(subtotal * HST);
+    const total = subtotal + tax;
+
+    return { tier, lines, subtotal, tax, total };
+  }
+
+  function round100(n) { return Math.round(n / 50) * 50; }
+
+  // Form submit
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const errors = validate();
+    if (errors.length) {
+      errorBox.hidden = false;
+      errorList.innerHTML = errors.map(er => '<li>' + er + '</li>').join('');
+      errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    errorBox.hidden = true;
+
+    const q = compute();
+    renderQuote(q);
+    result.hidden = false;
+    form.style.opacity = '.4';
+    form.style.pointerEvents = 'none';
+    setTimeout(() => {
+      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  });
+
+  // Reset
+  form.addEventListener('reset', () => {
+    result.hidden = true;
+    errorBox.hidden = true;
+    form.style.opacity = '1';
+    form.style.pointerEvents = '';
+    form.querySelectorAll('.field.error').forEach(el => el.classList.remove('error'));
+    postalHint.textContent = 'We service postal codes starting with N1, N2, N3 (K-W region).';
+    postalHint.className = 'field-hint';
+  });
+
+  // Render quote
+  function renderQuote(q) {
+    const id = 'GO2-' + Date.now().toString().slice(-6);
+    f('quoteId').textContent = id;
+    f('quoteCustomer').textContent = fields.name.value + ' · ' + fields.email.value;
+    f('quoteAddress').textContent = (fields.address.value || fields.postal.value) || '';
+    f('quoteDate').textContent = new Date().toLocaleDateString('en-CA', { year:'numeric', month:'long', day:'numeric' });
+
+    f('quoteSystem').innerHTML = `
+      <div class="system-pill">
+        <span class="system-label">Selected system</span>
+        <strong>${q.tier.name}</strong>
+        <small>${q.tier.warranty}</small>
+      </div>`;
+
+    const tbody = f('quoteLines');
+    tbody.innerHTML = q.lines.map(l => `
+      <tr>
+        <td>${l.label}</td>
+        <td class="quote-detail">${l.detail}</td>
+        <td class="num">${fmt(l.amount)}</td>
+      </tr>`).join('');
+
+    f('quoteSubtotal').textContent = fmt(q.subtotal);
+    f('quoteTax').textContent = fmt(q.tax);
+    f('quoteTotal').textContent = fmt(q.total);
+
+    // Financing — 12 months 0%
+    const monthly = Math.round(q.total / 12);
+    f('quoteFinance').textContent = '$' + monthly.toLocaleString();
+  }
+
+  function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+
+  // Quote actions
+  f('quoteEdit').addEventListener('click', () => {
+    result.hidden = true;
+    form.style.opacity = '1';
+    form.style.pointerEvents = '';
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  f('quotePrint').addEventListener('click', () => window.print());
+  f('quoteBook').addEventListener('click', () => {
+    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+  });
+}
+
+/* ---------- Scroll reveal ---------- */
+function initRevealAnimations() {
+  const els = document.querySelectorAll('.service-card, .tier, .review-card, .timeline li, .section-head');
+  els.forEach(el => el.classList.add('fade-in'));
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(el => obs.observe(el));
+}
+
+/* ---------- Nav scroll spy ---------- */
+function initScrollSpy() {
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+  if (!sections.length || !navLinks.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.getAttribute('id');
+        navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => obs.observe(s));
+}
+
+</script>
+</body>
+</html>
